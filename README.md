@@ -9,66 +9,8 @@
 <a href="https://waffle.io/Labs64/laravel-boilerplate"><img src="https://badge.waffle.io/Labs64/laravel-boilerplate.svg?label=ready&title=Ready" alt="Stories in Ready"></a>
 </p>
 
-# Laravel 5 Boilerplate Project
+# iRent Project
 
-_Laravel Boilerplate_ provides a very flexible and extensible way of building your custom Laravel 5 applications.
-
-## Table of Contents
-
-- [Features](#features)
-- [Theme Demo](#theme-demo)
-- [System Requirements](#system-requirements)
-- [Installation](#installation)
-- [Run](#run)
-- [Docker](#docker) :point_left:
-- [How To's & Modules configuration](#how-tos--modules-configuration)
-- [How to contribute](#how-to-contribute)
-- [Bugs and Feedback](#bugs-and-feedback)
-- [License](#license)
-
-## Features
-- Administration Dashboard with [Gentelella Admin Theme](https://github.com/puikinsh/gentelella)
-- Responsive Layout
-- Bootstrap 3
-- Font Awesome
-- Socialite Integration
-- [Invisible reCAPTCHA](https://github.com/albertcht/invisible-recaptcha)
-- **Membership plans and Access control management** by [NetLicensing](https://netlicensing.io/?utm_source=Laravel_Boilerplate&utm_medium=github&utm_campaign=laravel_boilerplate&utm_content=readme) :thumbsup:
-- MySQL, SQLite, PostgreSQL databases support
-- AWS S3 support
-- Google Analytics support in frontend
-    - Configuration can be easily made via ```analytics.php``` and template ```ga.blade.php```
-- Automatic errors feedback via eMail
-- i18n support and automatic user client language recognition
-- Helper class ```ToJs``` to ease work with JavaScript variables using blade directive ```@tojs```
-- Helper class ```Meta``` blade directive ```@meta``` to ease work with meta tags & properties
-- Models for Users and Roles
-- Added Auth controller to allow registration activation by email
-- Extended Auth configuration by:
-    - Ability to switch on/off user registration
-    - Set up default user role
-    - Ability to switch on/off registration activation email
-    - Captcha configuration
-- Gravatar support in User model and flexible configuration via ```gravatar.php```
-- Added library log viewer to allow printing errors in a log file ```laravel.log```
-- Added library sortable for tables sorting
-- i18n: ```trans()``` method replaced by ```__()``` in order to support internationalization via JSON resources
-- Registration using social services (Google+, Facebook, Twitter)
-- Storing last social login in user session
-- Added event on SocialLogin
-- Added listeners on some events; e.g. Login, Logout, Registration, SocialLogin
-- Added notification ```ConfirmEmail``` on user account confirmation
-- Added policies to access backend services
-- Added database seeders for Users, Roles, and UserRoles
-- Improved migration ```create_users_table.php```; fields added active, confirm and deleted_at for soft deletion
-- JavaScript / CSS minification
-- JavaScript / CSS hashing
-- Some very useful helper functions to ease your live :)
-
-## Theme Demo
-![Gentelella Bootstrap Admin Template](https://cdn.colorlib.com/wp/wp-content/uploads/sites/2/gentelella-admin-template-preview.jpg "Gentelella Theme Browser Preview")
-
-**[Gentelella Admin Theme Demo](https://colorlib.com/polygon/gentelella/index.html)**
 
 ## System Requirements
 To be able to run Laravel Boilerplate you have to meet the following requirements:
@@ -173,29 +115,3 @@ $ docker-compose down
  or
 $ docker-compose -f docker-compose.yml -f docker-compose.utils.yml down
 ```
-
-## How To's & Modules configuration
-
-Check out project [wiki](https://github.com/Labs64/laravel-boilerplate/wiki) pages for modules configuration and troubleshooting.
-For more detailed instructions on how to use Laravel and it's extensions, check out the full Laravel [documentation](https://laravel.com/docs/).
-
-## How to contribute
-
-Fork the repository, read the [CONTRIBUTE](CONTRIBUTE.md) file and make some changes.
-Once you're done with your changes send a pull request and check [CI validation status](https://travis-ci.org/Labs64/laravel-boilerplate).
-Thanks!
-
-### Contributors and Supporters
-
-Thank you to all the [contributors](https://github.com/Labs64/laravel-boilerplate/graphs/contributors) on this project. Your help is much appreciated!
-
-- [Photolancer Zone](https://photolancer.zone/?utm_source=Laravel_Boilerplate&utm_medium=github&utm_campaign=laravel_boilerplate&utm_content=readme) team for a great support in project structuring.
-- [DigiPass Laravel](https://github.com/Labs64/DigiPass-laravel) - Membership pricing plans and Access control management for Laravel
-
-## Bugs and Feedback
-
-For bugs, questions and discussions please use the [GitHub Issues](https://github.com/Labs64/laravel-boilerplate/issues).
-
-## License
-
-This boilerplate is open-sourced software licensed under the [MIT license](LICENSE).
