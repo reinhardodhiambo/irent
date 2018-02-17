@@ -10,7 +10,7 @@ class ApartmentController
 {
     public function index(Request $request)
     {
-        $apartments = Apartment::where('owner_id','!=','')->paginate(10);
+        $apartments = Apartment::with('houses')->where('owner_id','!=','')->paginate(10);
         return view('admin.apartments', ['apartments' => $apartments]);
     }
 
@@ -52,25 +52,25 @@ class ApartmentController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Apartment $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', ['apartment' => $apartment]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param $apartment
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($apartment)
     {
-        $apartment = Apartment::find($id);
+        $apartment = Apartment::with('houses')->whereIn('id',$apartment);
 
-        return view('admin.apartments', compact('apartment','id'));
+        return view('admin.apartments.edit', compact('apartment','id'));
 
     }
 
