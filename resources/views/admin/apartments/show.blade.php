@@ -68,7 +68,7 @@
                     <td>{{ $house->floor }}</td>
                     <td>
 
-                        <a class="btn btn-xs btn-primary" href="{{ route('admin.apartments.show', [$house->id]) }}"
+                        <a class="btn btn-xs btn-primary" href="{{ route('admin.houses.show', [$house->id]) }}"
                            data-toggle="tooltip" data-placement="top"
                            data-title="{{ __('views.admin.users.index.show') }}">
                             <i class="fa fa-eye"></i>
@@ -78,7 +78,7 @@
                            data-title="{{ __('views.admin.users.index.edit') }}">
                             <i class="fa fa-pencil"></i>
                         </a>
-                        <a class="btn btn-xs btn-danger" href="{{ route('admin.apartments.delete', [$house->id]) }}"
+                        <a class="btn btn-xs btn-danger" href="{{ route('admin.houses.delete', [$house->id]) }}"
                            data-toggle="tooltip" data-placement="top"
                            data-title="delete">
                             <i class="fa fa-trash"></i>

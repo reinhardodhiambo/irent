@@ -58,12 +58,12 @@ class HouseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param House $house
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(House $house)
     {
-        //
+        return view('admin.houses.show', ['house' => $house]);
     }
 
     /**
@@ -97,6 +97,11 @@ class HouseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $house = House::find($id);
+        $house->delete();
+
+        return back()->withInput();
+
+
     }
 }
