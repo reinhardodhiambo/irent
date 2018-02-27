@@ -38,6 +38,7 @@ class HouseController extends Controller
         $house -> bathroom = $request->bathroom;
         $house -> toilet = $request->toilet;
         $house -> balcony = $request->balcony;
+        $house -> price = $request->price;
         $house->save();
 
         return back()->withInput();
@@ -69,12 +70,15 @@ class HouseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param $house
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($house)
     {
-        //
+        $house = House::where('id',$house)->first();
+
+        return view('admin.houses.edit', compact('house','id'));
+
     }
 
     /**
@@ -86,7 +90,17 @@ class HouseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $house = House::find($id);
+        $house -> house_number = $request->house_number;
+        $house -> bedroom = $request->bedroom;
+        $house -> kitchen = $request->kitchen;
+        $house -> bathroom = $request->bathroom;
+        $house -> toilet = $request->toilet;
+        $house -> balcony = $request->balcony;
+        $house -> price = $request->price;
+        $house->save();
+
+        return back()->withInput();
     }
 
     /**

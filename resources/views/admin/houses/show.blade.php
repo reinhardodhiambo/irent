@@ -50,6 +50,13 @@
             </tr>
 
             <tr>
+                <th>Price</th>
+                <td>
+                    {{ $house->price}}
+                </td>
+            </tr>
+
+            <tr>
                 <th>Created At</th>
                 <td>{{ $house->created_at }} ({{ $house->created_at->diffForHumans() }})</td>
             </tr>

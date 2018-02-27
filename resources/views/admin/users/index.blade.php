@@ -52,20 +52,7 @@
                 <th>@sortablelink('email', __('views.admin.users.index.table_header_0'),['page' =>
                     $users->currentPage()])
                 </th>
-                <th>@sortablelink('name', __('views.admin.users.index.table_header_1'),['page' =>
-                    $users->currentPage()])
-                </th>
-                <th>{{ __('views.admin.users.index.table_header_2') }}</th>
-                <th>@sortablelink('active', __('views.admin.users.index.table_header_3'),['page' =>
-                    $users->currentPage()])
-                </th>
                 <th>@sortablelink('confirmed', __('views.admin.users.index.table_header_4'),['page' =>
-                    $users->currentPage()])
-                </th>
-                <th>@sortablelink('created_at', __('views.admin.users.index.table_header_5'),['page' =>
-                    $users->currentPage()])
-                </th>
-                <th>@sortablelink('updated_at', __('views.admin.users.index.table_header_6'),['page' =>
                     $users->currentPage()])
                 </th>
                 <th>Actions</th>
@@ -77,23 +64,12 @@
                 @if($user->hasRole('caretaker'))
                     <tr>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->roles->pluck('name')->implode(',') }}</td>
-                        <td>
-                            @if($user->active)
-                                <span class="label label-primary">{{ __('views.admin.users.index.active') }}</span>
-                            @else
-                                <span class="label label-danger">{{ __('views.admin.users.index.inactive') }}</span>
-                            @endif
-                        </td>
                         <td>
                             @if($user->confirmed)
                                 <span class="label label-success">{{ __('views.admin.users.index.confirmed') }}</span>
                             @else
                                 <span class="label label-warning">{{ __('views.admin.users.index.not_confirmed') }}</span>
                             @endif</td>
-                        <td>{{ $user->created_at }}</td>
-                        <td>{{ $user->updated_at }}</td>
                         <td>
                             <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', [$user->id]) }}"
                                data-toggle="tooltip" data-placement="top"

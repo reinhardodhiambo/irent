@@ -47,12 +47,8 @@
             <thead>
             <tr>
                 <th>House No.</th>
-                <th>Bedrooms</th>
-                <th>Kitchen</th>
-                <th>Bathroom</th>
-                <th>Restroom</th>
-                <th>Balcony</th>
                 <th>Floor</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -60,12 +56,8 @@
             @foreach($apartment->houses as $house)
                 <tr>
                     <td>{{ $house->house_number }}</td>
-                    <td>{{ $house->bedroom }}</td>
-                    <td>{{ $house->kitchen }}</td>
-                    <td>{{ $house->bathroom }}</td>
-                    <td>{{ $house->toilet }}</td>
-                    <td>{{ $house->balcony }}</td>
                     <td>{{ $house->floor }}</td>
+                    <td> <span class="label label-warning">Vacant</span></td>
                     <td>
 
                         <a class="btn btn-xs btn-primary" href="{{ route('admin.houses.show', [$house->id]) }}"
@@ -73,7 +65,7 @@
                            data-title="{{ __('views.admin.users.index.show') }}">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-xs btn-info" href="{{ route('admin.apartment.edit', [$house->id]) }}"
+                        <a class="btn btn-xs btn-info" href="{{ route('admin.house.edit', [$house->id]) }}"
                            data-toggle="tooltip" data-placement="top"
                            data-title="{{ __('views.admin.users.index.edit') }}">
                             <i class="fa fa-pencil"></i>
@@ -116,24 +108,24 @@
                                                    value="{{ old('house_number') }}" required autofocus/>
                                         </div>
                                         <div><select class="select2_group form-control" id="bedroom" name="bedroom">
-                                            <optgroup label="Not Ensuit">
-                                                <option value="1">1 bedroom</option>
-                                                <option value="2">2 bedrooms</option>
-                                            </optgroup>
-                                            <optgroup label="All Ensuit">
-                                                <option value="3">1 bedroom</option>
-                                                <option value="4">2 bedrooms</option>
-                                                <option value="5">3 bedrooms</option>
-                                                <option value="6">4 bedrooms</option>
-                                                <option value="7">5 bedrooms</option>
-                                            </optgroup>
-                                            <optgroup label="Not all Ensuit">
-                                                <option value="8">2 bedrooms & 1 ensuit</option>
-                                                <option value="9">3 bedrooms & 1 ensuit</option>
-                                                <option value="10">4 bedrooms & 1 ensuit</option>
-                                                <option value="11">5 bedrooms & 1 ensuit</option>
-                                            </optgroup>
-                                        </select></div>
+                                                <optgroup label="Not Ensuit">
+                                                    <option value="1">1 bedroom</option>
+                                                    <option value="2">2 bedrooms</option>
+                                                </optgroup>
+                                                <optgroup label="All Ensuit">
+                                                    <option value="3">1 bedroom</option>
+                                                    <option value="4">2 bedrooms</option>
+                                                    <option value="5">3 bedrooms</option>
+                                                    <option value="6">4 bedrooms</option>
+                                                    <option value="7">5 bedrooms</option>
+                                                </optgroup>
+                                                <optgroup label="Not all Ensuit">
+                                                    <option value="8">2 bedrooms & 1 ensuit</option>
+                                                    <option value="9">3 bedrooms & 1 ensuit</option>
+                                                    <option value="10">4 bedrooms & 1 ensuit</option>
+                                                    <option value="11">5 bedrooms & 1 ensuit</option>
+                                                </optgroup>
+                                            </select></div>
                                         <div>
                                             <select id="kitchen" name="kitchen" class="form-control" required="">
                                                 <option value="">select type of kitchen</option>
@@ -184,6 +176,12 @@
                                                 <option value="7">7th floor</option>
                                                 <option value="8">8th floor</option>
                                             </select>
+                                        </div>
+
+                                        <div>
+                                            <input type="text" name="price" class="form-control"
+                                                   placeholder="Monthly price"
+                                                   value="{{ old('price') }}" required autofocus/>
                                         </div>
                                         <div>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel

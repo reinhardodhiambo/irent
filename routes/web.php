@@ -70,6 +70,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('housestore/{apartment_id}', 'HouseController@create')->name('housestore');
     Route::get('houses/{house}/show', 'HouseController@show')->name('houses.show');
     Route::get('house/{id}', 'HouseController@destroy')->name('houses.delete');
+    Route::put('house/{apartment}', 'HouseController@update')->name('houses.update');
+    Route::get('houses/{house}/edit', 'HouseController@edit')->name('house.edit');
     Route::get('permissions/{user}/repeat', 'PermissionController@repeat')->name('permissions.repeat');
     Route::get('dashboard/log-chart', 'DashboardController@getLogChartData')->name('dashboard.log.chart');
     Route::get('dashboard/registration-chart', 'DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');

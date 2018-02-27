@@ -64,12 +64,12 @@
                         <ul class="nav child_menu">
                             <li>
                                 <a href="{{ route('log-viewer::dashboard') }}">
-                                    {{ __('views.backend.section.navigation.menu_2_2') }}
+                                    {{ __('views.backend.section.navigation.menu_2_3') }}
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('log-viewer::logs.list') }}">
-                                    {{ __('views.backend.section.navigation.menu_2_3') }}
+                                    {{ __('views.backend.section.navigation.menu_2_2') }}
                                 </a>
                             </li>
                         </ul>
