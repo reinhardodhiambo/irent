@@ -11,10 +11,10 @@ bower_components/
 bootstrap/compiled.php
 #bootstrap/cache/
 
-storage/
+#storage/
 storage/debugbar/
-storage/framework/views/
-storage/framework/sessions/
+#storage/framework/views/
+#storage/framework/sessions/
 
 composer.phar
 #composer.lock
