@@ -17,7 +17,7 @@ storage/framework/views/
 storage/framework/sessions/
 
 composer.phar
-composer.lock
+#composer.lock
 phpunit.phar
 
 public/assets
