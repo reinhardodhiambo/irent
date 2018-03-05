@@ -49,7 +49,7 @@ Route::group(['namespace' => 'Auth'], function () {
 /**
  * Backend routes
  */
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function () {
 
     // Dashboard
     Route::get('/', 'DashboardController@index')->name('dashboard');

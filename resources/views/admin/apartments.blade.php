@@ -4,7 +4,7 @@
 
 @section('content')
 
-
+    @if(auth()->user()->hasRole('administrator'))
     <div class="row">
         <div class="login_wrapper">
             <div class="animate form">
@@ -39,6 +39,7 @@
         </div>
 
     </div>
+    @endif
 
     <div class="row">
         <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
@@ -66,16 +67,19 @@
                            data-title="{{ __('views.admin.users.index.show') }}">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-xs btn-info" href="{{ route('admin.apartment.edit', [$apartment->id]) }}"
-                           data-toggle="tooltip" data-placement="top"
-                           data-title="{{ __('views.admin.users.index.edit') }}">
-                            <i class="fa fa-pencil"></i>
-                        </a>
-                        <a class="btn btn-xs btn-danger" href="{{ route('admin.apartments.delete', [$apartment->id]) }}"
-                           data-toggle="tooltip" data-placement="top"
-                           data-title="delete">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                        @if(auth()->user()->hasRole('administrator'))
+                            <a class="btn btn-xs btn-info" href="{{ route('admin.apartment.edit', [$apartment->id]) }}"
+                               data-toggle="tooltip" data-placement="top"
+                               data-title="{{ __('views.admin.users.index.edit') }}">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a class="btn btn-xs btn-danger"
+                               href="{{ route('admin.apartments.delete', [$apartment->id]) }}"
+                               data-toggle="tooltip" data-placement="top"
+                               data-title="delete">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

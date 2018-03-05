@@ -3,38 +3,42 @@
 @section('content')
     <!-- page content -->
     <!-- top tiles -->
-    <div class="row tile_count">
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-users"></i> {{ __('views.admin.dashboard.count_0') }}</span>
-            <div class="count green">{{ $counts['users'] }}</div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-address-card"></i> {{ __('views.admin.dashboard.count_1') }}</span>
-            <div>
-                <span class="count green">{{  $counts['users'] - $counts['users_unconfirmed'] }}</span>
-                <span class="count">/</span>
-                <span class="count red">{{ $counts['users_unconfirmed'] }}</span>
+    @if(auth()->user()->hasRole('administrator'))
+        <div class="row tile_count">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-users"></i> {{ __('views.admin.dashboard.count_0') }}</span>
+                <div class="count green">{{ $counts['users'] }}</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i
+                            class="fa fa-address-card"></i> {{ __('views.admin.dashboard.count_1') }}</span>
+                <div>
+                    <span class="count green">{{  $counts['users'] - $counts['users_unconfirmed'] }}</span>
+                    <span class="count">/</span>
+                    <span class="count red">{{ $counts['users_unconfirmed'] }}</span>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i
+                            class="fa fa-user-times "></i> {{ __('views.admin.dashboard.count_2') }}</span>
+                <div>
+                    <span class="count green">{{  $counts['users'] - $counts['users_inactive'] }}</span>
+                    <span class="count">/</span>
+                    <span class="count red">{{ $counts['users_inactive'] }}</span>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-lock"></i> {{ __('views.admin.dashboard.count_3') }}</span>
+                <div>
+                    <span class="count green">{{  $counts['protected_pages'] }}</span>
+                </div>
             </div>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user-times "></i> {{ __('views.admin.dashboard.count_2') }}</span>
-            <div>
-                <span class="count green">{{  $counts['users'] - $counts['users_inactive'] }}</span>
-                <span class="count">/</span>
-                <span class="count red">{{ $counts['users_inactive'] }}</span>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-lock"></i> {{ __('views.admin.dashboard.count_3') }}</span>
-            <div>
-                <span class="count green">{{  $counts['protected_pages'] }}</span>
-            </div>
-        </div>
-    </div>
+    @endif
     <!-- /top tiles -->
 
-    
-    <br />
+
+    <br/>
 
     <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -45,7 +49,8 @@
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
                                 <i class="fa fa-wrench"></i>
                             </a>
                         </li>
@@ -94,26 +99,28 @@
                                         </td>
                                         <td id="registration_usage_google"></td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square blue"></i>
-                                                <span class="tile_label">
+                                    @if(auth()->user()->hasRole('administrator'))
+                                        <tr>
+                                            <td>
+                                                <p><i class="fa fa-square blue"></i>
+                                                    <span class="tile_label">
                                                     {{ __('views.admin.dashboard.source_2') }}
                                                 </span>
-                                            </p>
-                                        </td>
-                                        <td id="registration_usage_facebook"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square grren"></i>
-                                                <span class="tile_label">
+                                                </p>
+                                            </td>
+                                            <td id="registration_usage_facebook"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p><i class="fa fa-square grren"></i>
+                                                    <span class="tile_label">
                                                      {{ __('views.admin.dashboard.source_3') }}
                                                 </span>
-                                            </p>
-                                        </td>
-                                        <td id="registration_usage_twitter"></td>
-                                    </tr>
+                                                </p>
+                                            </td>
+                                            <td id="registration_usage_twitter"></td>
+                                        </tr>
+                                    @endif
                                 </table>
                             </td>
                         </tr>
@@ -123,7 +130,7 @@
         </div>
     </div>
 
- 
+
 @endsection
 
 @section('scripts')

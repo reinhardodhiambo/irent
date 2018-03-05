@@ -12,4 +12,8 @@ class Apartment extends Model
     {
         return $this->hasMany('App\House');
     }
+
+    public function repairs(){
+        return $this->hasMany('App\Repair');
+    }
 }

@@ -14,4 +14,9 @@ class House extends Model
     {
         return $this->belongsTo('App\Apartment');
     }
+
+    public function payment(){
+
+        return $this->hasMany('App\Payment');
+    }
 }

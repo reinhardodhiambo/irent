@@ -37,8 +37,10 @@
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add House
-    </button>
+    @if(auth()->user()->hasRole('administrator'))
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add House
+        </button>
+    @endif
 
 
     <div class="row">
@@ -57,7 +59,7 @@
                 <tr>
                     <td>{{ $house->house_number }}</td>
                     <td>{{ $house->floor }}</td>
-                    <td> <span class="label label-warning">Vacant</span></td>
+                    <td><span class="label label-warning">Vacant</span></td>
                     <td>
 
                         <a class="btn btn-xs btn-primary" href="{{ route('admin.houses.show', [$house->id]) }}"
@@ -65,16 +67,18 @@
                            data-title="{{ __('views.admin.users.index.show') }}">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-xs btn-info" href="{{ route('admin.house.edit', [$house->id]) }}"
-                           data-toggle="tooltip" data-placement="top"
-                           data-title="{{ __('views.admin.users.index.edit') }}">
-                            <i class="fa fa-pencil"></i>
-                        </a>
-                        <a class="btn btn-xs btn-danger" href="{{ route('admin.houses.delete', [$house->id]) }}"
-                           data-toggle="tooltip" data-placement="top"
-                           data-title="delete">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                        @if(auth()->user()->hasRole('administrator'))
+                            <a class="btn btn-xs btn-info" href="{{ route('admin.house.edit', [$house->id]) }}"
+                               data-toggle="tooltip" data-placement="top"
+                               data-title="{{ __('views.admin.users.index.edit') }}">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a class="btn btn-xs btn-danger" href="{{ route('admin.houses.delete', [$house->id]) }}"
+                               data-toggle="tooltip" data-placement="top"
+                               data-title="delete">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach
