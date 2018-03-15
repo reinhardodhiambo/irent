@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreatePaymentTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->string('method');
-            $table->float('amount')->default(0);
-            $table->tinyInteger('apartment_id');
-            $table->tinyInteger('house_id');
             $table->tinyInteger('user_id');
+            $table->tinyInteger('apartment_id');
+            $table->tinyInteger('to_user_id')->default(0);
+            $table->string('title')->nullable();
+            $table->string('message');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreatePaymentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('notifications');
     }
 }

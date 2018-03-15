@@ -25,61 +25,28 @@
                 <li role="presentation" class="dropdown open">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="true">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
+                        <span class="badge bg-green"><?php echo e(count(auth()->user()->notifications)); ?></span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        <?php $__currentLoopData = auth()->user()->notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li>
                             <a>
-                                <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>
+                                
                                 <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
+                          <span><?php echo e($notification->user->name); ?></span>
+                          <span class="time"><?php echo e($notification->update_at); ?></span>
                         </span>
                                 <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                          <?php echo e($notification->message); ?>
+
                         </span>
                             </a>
                         </li>
-                        <li>
-                            <a>
-                                <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>
-                                <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>
-                                <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>
-                                <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                            </a>
-                        </li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <li>
                             <div class="text-center">
                                 <a>
-                                    <strong>See All Alerts</strong>
+                                    <strong>See All Notifications</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </div>

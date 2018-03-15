@@ -55,6 +55,8 @@
             </thead>
             <tbody>
             @foreach($apartments as $apartment)
+                {{ $apartment->houses }}
+                @if(array_search(auth()->user()->id,(array)$apartment->houses))
                 <tr>
                     <td>{{ $apartment->id }}</td>
                     <td>{{ $apartment->name }}</td>
@@ -82,6 +84,7 @@
                         @endif
                     </td>
                 </tr>
+                @endif
             @endforeach
             </tbody>
         </table>

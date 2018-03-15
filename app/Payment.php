@@ -13,4 +13,9 @@ class Payment extends Model
     {
         return $this->belongsTo('App\House', 'house_id');
     }
+
+    public function apartment()
+    {
+        return $this->belongsTo('App\Apartment', 'apartment_id');
+    }
 }

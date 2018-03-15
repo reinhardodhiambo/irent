@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentTable extends Migration
+class CreateUserHouseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreatePaymentTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->string('method');
-            $table->float('amount')->default(0);
-            $table->tinyInteger('apartment_id');
-            $table->tinyInteger('house_id');
+        Schema::create('user_house', function (Blueprint $table) {
             $table->tinyInteger('user_id');
+            $table->tinyInteger('house_id');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class CreatePaymentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('user_house');
     }
 }

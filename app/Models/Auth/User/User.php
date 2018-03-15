@@ -89,4 +89,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function notifications(){
+        return $this->hasMany('App\Notification');
+    }
+
+    public function UserHouse(){
+        return $this->hasMany('App\UserHouse');
+    }
 }

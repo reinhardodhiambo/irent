@@ -55,6 +55,9 @@
             </thead>
             <tbody>
             <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php echo e($apartment->houses); ?>
+
+                <?php if(array_search(auth()->user()->id,(array)$apartment->houses)): ?>
                 <tr>
                     <td><?php echo e($apartment->id); ?></td>
                     <td><?php echo e($apartment->name); ?></td>
@@ -82,6 +85,7 @@
                         <?php endif; ?>
                     </td>
                 </tr>
+                <?php endif; ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>

@@ -7,68 +7,87 @@
                 <section class="login_content">
                     <?php echo e(Form::open(['route' => 'register'])); ?>
 
-                        <h1><?php echo e(__('views.auth.register.header')); ?></h1>
-                        <div>
-                            <input type="text" name="name" class="form-control"
-                                   placeholder="<?php echo e(__('views.auth.register.input_0')); ?>"
-                                   value="<?php echo e(old('name')); ?>" required autofocus/>
+                    <h1><?php echo e(__('views.auth.register.header')); ?></h1>
+                    <div>
+                        <input type="text" name="name" class="form-control"
+                               placeholder="<?php echo e(__('views.auth.register.input_0')); ?>"
+                               value="<?php echo e(old('name')); ?>" required autofocus/>
+                    </div>
+                    <div>
+                        <input type="email" name="email" class="form-control"
+                               placeholder="<?php echo e(__('views.auth.register.input_1')); ?>"
+                               required/>
+                    </div>
+                    <div>
+                    <?php echo e(Form::label('role_admin', 'Landlord')); ?>
+
+                    <?php echo e(Form::radio('role', 'administrator', true, array('id'=>'role_admin'))); ?>
+
+
+                    <?php echo e(Form::label('role_tenant', 'Tenant')); ?>
+
+                    <?php echo e(Form::radio('role', 'authenticated', false, array('id'=>'role_tenant'))); ?>
+
+                    </div>
+                    <div>
+                        <input type="text" name="national_id" class="form-control"
+                               placeholder="National ID"
+                               required/>
+                    </div>
+                    <div>
+                        <input type="password" name="password" class="form-control"
+                               placeholder="<?php echo e(__('views.auth.register.input_2')); ?>"
+                               required=""/>
+                    </div>
+                    <div>
+                        <input type="password" name="password_confirmation" class="form-control"
+                               placeholder="<?php echo e(__('views.auth.register.input_3')); ?>"
+                               required/>
+                    </div>
+
+                    <?php if(session('status')): ?>
+                        <div class="alert alert-success">
+                            <?php echo e(session('status')); ?>
+
                         </div>
-                        <div>
-                            <input type="email" name="email" class="form-control"
-                                   placeholder="<?php echo e(__('views.auth.register.input_1')); ?>"
-                                   required/>
+                    <?php endif; ?>
+
+                    <?php if(!$errors->isEmpty()): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $errors->first(); ?>
+
                         </div>
-                        <div>
-                            <input type="password" name="password" class="form-control"
-                                   placeholder="<?php echo e(__('views.auth.register.input_2')); ?>"
-                                   required=""/>
-                        </div>
-                        <div>
-                            <input type="password" name="password_confirmation" class="form-control"
-                                   placeholder="<?php echo e(__('views.auth.register.input_3')); ?>"
-                                   required/>
-                        </div>
+                    <?php endif; ?>
 
-                        <?php if(session('status')): ?>
-                            <div class="alert alert-success">
-                                <?php echo e(session('status')); ?>
+                    <?php if(config('auth.captcha.registration')): ?>
+                        <?php echo app('captcha')->render(); ?>
+                    <?php endif; ?>
 
-                            </div>
-                        <?php endif; ?>
+                    <div>
+                        <button type="submit"
+                                class="btn btn-default submit"><?php echo e(__('views.auth.register.action_1')); ?></button>
+                    </div>
 
-                        <?php if(!$errors->isEmpty()): ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php echo $errors->first(); ?>
+                    <div class="clearfix"></div>
 
-                            </div>
-                        <?php endif; ?>
+                    <div class="separator">
+                        <p class="change_link"><?php echo e(__('views.auth.register.message')); ?>
 
-                        <?php if(config('auth.captcha.registration')): ?>
-                            <?php echo app('captcha')->render(); ?>
-                        <?php endif; ?>
-
-                        <div>
-                            <button type="submit"
-                                    class="btn btn-default submit"><?php echo e(__('views.auth.register.action_1')); ?></button>
-                        </div>
+                            <a href="<?php echo e(route('login')); ?>"
+                               class="to_register"> <?php echo e(__('views.auth.register.action_2')); ?> </a>
+                        </p>
 
                         <div class="clearfix"></div>
+                        <br/>
 
-                        <div class="separator">
-                            <p class="change_link"><?php echo e(__('views.auth.register.message')); ?>
+                        <div>
+                            <div class="h1"><?php echo e(config('app.name')); ?></div>
+                            <p>&copy; <?php echo e(date('Y')); ?> <?php echo e(config('app.name')); ?>
 
-                                <a href="<?php echo e(route('login')); ?>" class="to_register"> <?php echo e(__('views.auth.register.action_2')); ?> </a>
-                            </p>
-
-                            <div class="clearfix"></div>
-                            <br/>
-
-                            <div>
-                                <div class="h1"><?php echo e(config('app.name')); ?></div>
-                                <p>&copy; <?php echo e(date('Y')); ?> <?php echo e(config('app.name')); ?>. <?php echo e(__('views.auth.register.copyright_0')); ?></p>
-                                <p><?php echo e(__('views.auth.register.copyright_1')); ?></p>
-                            </div>
+                                . <?php echo e(__('views.auth.register.copyright_0')); ?></p>
+                            <p><?php echo e(__('views.auth.register.copyright_1')); ?></p>
                         </div>
+                    </div>
                     <?php echo e(Form::close()); ?>
 
                 </section>

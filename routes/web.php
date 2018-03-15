@@ -75,6 +75,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::get('permissions/{user}/repeat', 'PermissionController@repeat')->name('permissions.repeat');
     Route::get('dashboard/log-chart', 'DashboardController@getLogChartData')->name('dashboard.log.chart');
     Route::get('dashboard/registration-chart', 'DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');
+    Route::get('repairs/{apartment_id}/show', 'RepairController@index')->name('repairs.show');
+    Route::post('repairs/{user_id}/{apartment_id}/create', 'RepairController@create')->name('repairstore');
+    Route::get('payments/{apartment_id}/show', 'PaymentController@index')->name('payments.show');
+    Route::post('payments/{user_id}/{apartment_id}/create', 'PaymentController@create')->name('paymentstore');
+    Route::post('notifications/{user_id}/{apartment_id}/create', 'NotificationController@create')->name('notificationstore');
+    Route::post('house/{house_id}/rent', 'HouseController@rentUser')->name('house.rent');
 });
 
 

@@ -55,6 +55,13 @@
                     {{ $house->price}}
                 </td>
             </tr>
+            <tr>
+                <th>Status</th>
+                <td> @if(!isset($house->UserHouse->user_id))<span class="label label-warning">Vacant</span>
+                    @else
+                        <span class="label label-success">Not Vacant</span>
+                    @endif</td>
+            </tr>
 
             <tr>
                 <th>Created At</th>
@@ -67,6 +74,54 @@
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lk">Add Tenant
+    </button>
+
+    <div class="modal fade bs-example-modal-lk" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Add Tenant</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="login_wrapper">
+                            <div class="animate form">
+                                <section class="login_content">
+                                    {{ Form::open(array('route' => array('admin.house.rent',Request::route('house')))) }}
+                                    <form><h1>Rent</h1>
+                                        <div>
+                                            <input type="text" name="national_id" class="form-control"
+                                                   placeholder="national_id"
+                                                   required/>
+                                        </div>
+                                        <div>
+                                            <button type="submit"
+                                                    class="btn btn-default submit">Add
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    {{ Form::close() }}
+                                </section>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                </div>
+
+            </div>
+        </div>
     </div>
 
 @endsection

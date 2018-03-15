@@ -19,4 +19,9 @@ class House extends Model
 
         return $this->hasMany('App\Payment');
     }
+
+    public function UserHouse(){
+        return $this->hasOne('App\UserHouse');
+    }
+
 }

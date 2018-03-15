@@ -54,18 +54,6 @@
 
                             </a>
                         </li>
-                        <li>
-                            <a href="<?php echo e(route('admin.apartments')); ?>">
-                                <i class="fa fa-cog" aria-hidden="true"></i>
-                                Repairs
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo e(route('admin.apartments')); ?>">
-                                <i class="fa fa-money" aria-hidden="true"></i>
-                                Payments
-                            </a>
-                        </li>
                 </ul>
             </div>
 
