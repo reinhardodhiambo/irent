@@ -24,12 +24,12 @@
     20 => 'Illuminate\\Validation\\ValidationServiceProvider',
     21 => 'Illuminate\\View\\ViewServiceProvider',
     22 => 'AlbertCht\\InvisibleReCaptcha\\InvisibleReCaptchaServiceProvider',
-    23 => 'Arcanedev\\LogViewer\\LogViewerServiceProvider',
-    24 => 'Kyslik\\ColumnSortable\\ColumnSortableServiceProvider',
-    25 => 'Laravel\\Socialite\\SocialiteServiceProvider',
-    26 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    27 => 'Collective\\Html\\HtmlServiceProvider',
-    28 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    23 => 'Laravel\\Socialite\\SocialiteServiceProvider',
+    24 => 'Collective\\Html\\HtmlServiceProvider',
+    25 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    26 => 'Arcanedev\\LogViewer\\LogViewerServiceProvider',
+    27 => 'Kyslik\\ColumnSortable\\ColumnSortableServiceProvider',
+    28 => 'Laravel\\Tinker\\TinkerServiceProvider',
     29 => 'Laravel\\Tinker\\TinkerServiceProvider',
     30 => 'Arcanedev\\LogViewer\\LogViewerServiceProvider',
     31 => 'Collective\\Html\\HtmlServiceProvider',
@@ -173,13 +173,13 @@
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'Laravel\\Socialite\\Contracts\\Factory' => 'Laravel\\Socialite\\SocialiteServiceProvider',
-    'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
     'html' => 'Collective\\Html\\HtmlServiceProvider',
     'form' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'command.ide-helper.generate' => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
     'command.ide-helper.models' => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
   ),
   'when' => 
   array (
@@ -222,13 +222,13 @@
     'Laravel\\Socialite\\SocialiteServiceProvider' => 
     array (
     ),
-    'Laravel\\Tinker\\TinkerServiceProvider' => 
-    array (
-    ),
     'Collective\\Html\\HtmlServiceProvider' => 
     array (
     ),
     'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Tinker\\TinkerServiceProvider' => 
     array (
     ),
   ),

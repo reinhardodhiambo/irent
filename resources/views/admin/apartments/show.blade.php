@@ -67,7 +67,7 @@
             </thead>
             <tbody>
             @foreach($apartment->houses as $house)
-                @if(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('caretaker') || isset($house->UserHouse['user_id'][auth()->user()->id]))
+                @if(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('caretaker') || App\Http\Controllers\Admin\HouseController::getUserHouses($house->id,auth()->user()->id))
                 <tr>
                     <td>{{ $house->house_number }}</td>
                     <td>{{ $house->floor }}</td>

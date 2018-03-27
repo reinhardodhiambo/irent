@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Apartment;
+use App\House;
 use App\Models\Auth\User\User;
+use App\UserHouse;
 use Illuminate\Http\Request;
 
 class ApartmentController
 {
     public function index(Request $request)
     {
-        $apartments = Apartment::with('houses', 'houses.UserHouse')->where('owner_id','!=','')->paginate(10);
+        //$apartments = Apartment::with('houses', 'houses.UserHouse')->where('owner_id', '!=', '')->paginate(10);
+        $apartments = Apartment::with('houses', 'houses.UserHouse')->where('owner_id', '!=', '')->paginate(10);
         return view('admin.apartments', ['apartments' => $apartments]);
     }
 
@@ -32,7 +35,7 @@ class ApartmentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -68,22 +71,21 @@ class ApartmentController
      */
     public function edit($apartment)
     {
-        $apartment = Apartment::with('houses')->whereIn('id',$apartment);
+        $apartment = Apartment::with('houses')->whereIn('id', $apartment);
 
-        return view('admin.apartments.edit', compact('apartment','id'));
+        return view('admin.apartments.edit', compact('apartment', 'id'));
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-ID	Name 	Description 	Location	Actions
-1	Siwaka	Hostel	Keri Road	￼
-2	cxzc	xczxc	xczxczxczxc	￼
-3	xc\	\x	\xc	￼
-
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+    ID	Name 	Description 	Location	Actions
+     * 1    Siwaka    Hostel    Keri Road    ￼
+     * 2    cxzc    xczxc    xczxczxczxc    ￼
+     * 3    xc\    \x    \xc    ￼
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -100,7 +102,7 @@ ID	Name 	Description 	Location	Actions
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -109,5 +111,20 @@ ID	Name 	Description 	Location	Actions
         $apartment->delete();
 
         return redirect('/admin/apartments');
+    }
+
+
+    public static function getUserApartments($apartment_id, $user_id)
+    {
+        $houses = House::with('UserHouse')->where('apartment_id', $apartment_id)->get();
+        if ($houses) {
+            foreach ($houses as $house) {
+                $user_house = UserHouse::where('user_id',$user_id)->where('house_id',$house->id)->first();
+                if($user_house)
+                   return true;
+            }
+        }else
+        return false;
+
     }
 }

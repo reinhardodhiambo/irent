@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Auth\User\User;
 use App\UserHouse;
 use Illuminate\Http\Request;
+use App\Notifications\Auth\ContractEmail;
 
 class HouseController extends Controller
 {
@@ -136,7 +137,7 @@ class HouseController extends Controller
             $user_house = UserHouse::firstOrCreate(['user_id' => $user->id, 'house_id' => $house_id]);
 
             if ($user_house) {
-
+                $user->notify(new ContractEmail());
                 return json_encode($user_house);
             } else {
                 return json_encode(["error" => 403, "message" => "user not found"]);
@@ -147,4 +148,15 @@ class HouseController extends Controller
         return back()->withInput();
 
     }
+
+    public static function getUserHouses($house_id, $user_id)
+    {
+        $user_house = UserHouse::where('user_id',$user_id)->where('house_id',$house_id)->first();
+        if($user_house)
+            return true;
+        else return false;
+
+    }
+
+
 }

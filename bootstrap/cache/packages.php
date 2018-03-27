@@ -6,20 +6,6 @@
       0 => 'AlbertCht\\InvisibleReCaptcha\\InvisibleReCaptchaServiceProvider',
     ),
   ),
-  'arcanedev/log-viewer' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Arcanedev\\LogViewer\\LogViewerServiceProvider',
-    ),
-  ),
-  'kyslik/column-sortable' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Kyslik\\ColumnSortable\\ColumnSortableServiceProvider',
-    ),
-  ),
   'laravel/socialite' => 
   array (
     'providers' => 
@@ -29,13 +15,6 @@
     'aliases' => 
     array (
       'Socialite' => 'Laravel\\Socialite\\Facades\\Socialite',
-    ),
-  ),
-  'laravel/tinker' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
   'laravelcollective/html' => 
@@ -55,6 +34,27 @@
     'providers' => 
     array (
       0 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    ),
+  ),
+  'arcanedev/log-viewer' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Arcanedev\\LogViewer\\LogViewerServiceProvider',
+    ),
+  ),
+  'kyslik/column-sortable' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Kyslik\\ColumnSortable\\ColumnSortableServiceProvider',
+    ),
+  ),
+  'laravel/tinker' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
 );

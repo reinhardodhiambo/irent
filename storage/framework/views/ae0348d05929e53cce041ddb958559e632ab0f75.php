@@ -1,7 +1,6 @@
 <?php $__env->startSection('title', __('views.membership.title')); ?>
 
 <?php $__env->startSection('content'); ?>
-
     <?php if(auth()->user()->hasRole('administrator')): ?>
     <div class="row">
         <div class="login_wrapper">
@@ -55,9 +54,9 @@
             </thead>
             <tbody>
             <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php echo e($apartment->houses); ?>
+               
+                <?php if($apartment->owner_id === auth()->user()->id || auth()->user()->hasRole('caretaker')||App\Http\Controllers\Admin\ApartmentController::getUserApartments($apartment->id, auth()->user()->id )): ?>
 
-                <?php if(array_search(auth()->user()->id,(array)$apartment->houses)): ?>
                 <tr>
                     <td><?php echo e($apartment->id); ?></td>
                     <td><?php echo e($apartment->name); ?></td>

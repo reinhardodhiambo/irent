@@ -3,7 +3,6 @@
 @section('title', __('views.membership.title'))
 
 @section('content')
-
     @if(auth()->user()->hasRole('administrator'))
     <div class="row">
         <div class="login_wrapper">
@@ -55,8 +54,9 @@
             </thead>
             <tbody>
             @foreach($apartments as $apartment)
-                {{ $apartment->houses }}
-                @if(array_search(auth()->user()->id,(array)$apartment->houses))
+               {{-- @if(array_search(['user_id'=>auth()->user()->id],$apartment->houses))--}}
+                @if($apartment->owner_id === auth()->user()->id || auth()->user()->hasRole('caretaker')||App\Http\Controllers\Admin\ApartmentController::getUserApartments($apartment->id, auth()->user()->id ))
+
                 <tr>
                     <td>{{ $apartment->id }}</td>
                     <td>{{ $apartment->name }}</td>

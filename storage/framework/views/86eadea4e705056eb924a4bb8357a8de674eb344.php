@@ -67,7 +67,7 @@
             </thead>
             <tbody>
             <?php $__currentLoopData = $apartment->houses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $house): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php if(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('caretaker') || isset($house->UserHouse['user_id'][auth()->user()->id])): ?>
+                <?php if(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('caretaker') || App\Http\Controllers\Admin\HouseController::getUserHouses($house->id,auth()->user()->id)): ?>
                 <tr>
                     <td><?php echo e($house->house_number); ?></td>
                     <td><?php echo e($house->floor); ?></td>
