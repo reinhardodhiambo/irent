@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel 5 Labs64 Boilerplate'),
+    'name' => env('APP_NAME', 'iRent'),
 
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
     'debug_emails' => env('APP_DEBUG_EMAILS', false),
 
     /*
@@ -116,7 +116,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY','base64:bkhfQkfsXqvBnCsMeam1r1OxkKtp2krsugIu70nbyGE='),
 
     'cipher' => 'AES-256-CBC',
 
