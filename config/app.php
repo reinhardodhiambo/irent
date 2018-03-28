@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
     'debug_emails' => env('APP_DEBUG_EMAILS', false),
 
     /*
