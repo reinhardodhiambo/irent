@@ -3,6 +3,7 @@
 data/
 
 # Laravel, nodeJS, Bower, Gulp exclusions, Composer exclusions
+#unignored this for heroku to work
 #.htaccess
 vendor/
 node_modules/
@@ -20,8 +21,9 @@ composer.phar
 #composer.lock
 phpunit.phar
 
-public/assets
-public/mix-manifest.json
+#unignored this two for heroku
+#public/assets
+#public/mix-manifest.json
 
 .env
 .env.*.php
