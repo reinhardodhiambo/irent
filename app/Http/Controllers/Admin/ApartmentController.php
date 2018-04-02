@@ -13,7 +13,7 @@ class ApartmentController
     public function index(Request $request)
     {
         //$apartments = Apartment::with('houses', 'houses.UserHouse')->where('owner_id', '!=', '')->paginate(10);
-        $apartments = Apartment::with('houses', 'houses.UserHouse')->where('owner_id', '!=', '')->paginate(10);
+        $apartments = Apartment::with('houses', 'houses.UserHouse')->paginate(10);
         return view('admin.apartments', ['apartments' => $apartments]);
     }
 
