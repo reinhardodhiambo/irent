@@ -32,6 +32,7 @@ class CaretakerController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'owner_id' => auth()->user()->id,
             'confirmation_code' => Uuid::uuid4(),
             'confirmed' => false
         ]);
