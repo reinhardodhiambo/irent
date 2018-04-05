@@ -7,6 +7,7 @@ use App\House;
 use App\Models\Auth\User\User;
 use App\UserHouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController
 {
@@ -43,7 +44,7 @@ class ApartmentController
         $apartment = new Apartment([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
-            'owner_id' => '1',
+            'owner_id' => auth()->user()->id,
             'location' => $request->get('location'),
         ]);
 
