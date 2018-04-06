@@ -138,14 +138,14 @@ class HouseController extends Controller
 
             if ($user_house) {
                 $user->notify(new ContractEmail());
-                return json_encode($user_house);
-            } else {
+                return back()->withInput();
+            } 
                 return json_encode(["error" => 403, "message" => "user not found"]);
-            }
+
 
         }
 
-        return back()->withInput();
+        return json_encode(["error" => 403, "message" => "user not found"]);
 
     }
 
