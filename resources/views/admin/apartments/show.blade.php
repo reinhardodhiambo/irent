@@ -4,6 +4,20 @@
 
 @section('content')
     <div class="row">
+        @if(auth()->user()->hasRole('administrator'))
+            <button type="button " class="btn btn-primary fa fa-home" data-toggle="modal" data-target=".bs-example-modal-lg">
+            </button>
+        @endif
+        <button type="button" class="btn btn-primary fa fa-envelope" data-toggle="modal" data-target=".bs-example-modal-lk">
+        </button>
+        <a class="btn btn-primary" href="{{ route('admin.repairs.show', [$apartment->id]) }}">
+            <i class="fa fa-briefcase" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-primary" href="{{ route('admin.payments.show', [$apartment->id]) }}">
+            <i class="fa fa-money" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="row">
         <table class="table table-striped table-hover">
             <tbody>
 
@@ -37,18 +51,7 @@
             </tbody>
         </table>
     </div>
-    @if(auth()->user()->hasRole('administrator'))
-        <button type="button " class="btn btn-primary fa fa-home" data-toggle="modal" data-target=".bs-example-modal-lg">
-        </button>
-    @endif
-    <button type="button" class="btn btn-primary fa fa-envelope" data-toggle="modal" data-target=".bs-example-modal-lk">
-    </button>
-    <a class="btn btn-primary" href="{{ route('admin.repairs.show', [$apartment->id]) }}">
-        <i class="fa fa-briefcase" aria-hidden="true"></i>
-    </a>
-    <a class="btn btn-primary" href="{{ route('admin.payments.show', [$apartment->id]) }}">
-        <i class="fa fa-money" aria-hidden="true"></i>
-    </a>
+
 
 
     <div class="row">
