@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(isset(auth()->user()->id))
+            return redirect('/admin');;
         return view('auth.login');
     }
 }
