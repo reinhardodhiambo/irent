@@ -38,19 +38,16 @@
         </table>
     </div>
     <?php if(auth()->user()->hasRole('administrator')): ?>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add House
+        <button type="button " class="btn btn-primary fa fa-home" data-toggle="modal" data-target=".bs-example-modal-lg">
         </button>
     <?php endif; ?>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lk">Add
-        Notification
+    <button type="button" class="btn btn-primary fa fa-envelope" data-toggle="modal" data-target=".bs-example-modal-lk">
     </button>
-    <a href="<?php echo e(route('admin.repairs.show', [$apartment->id])); ?>">
-        <i class="fa fa-cog" aria-hidden="true"></i>
-        Repairs
+    <a class="btn btn-primary" href="<?php echo e(route('admin.repairs.show', [$apartment->id])); ?>">
+        <i class="fa fa-briefcase" aria-hidden="true"></i>
     </a>
-    <a href="<?php echo e(route('admin.payments.show', [$apartment->id])); ?>">
+    <a class="btn btn-primary" href="<?php echo e(route('admin.payments.show', [$apartment->id])); ?>">
         <i class="fa fa-money" aria-hidden="true"></i>
-        Payment
     </a>
 
 
