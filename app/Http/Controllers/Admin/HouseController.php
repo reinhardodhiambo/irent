@@ -39,6 +39,7 @@ class HouseController extends Controller
         $house->bedroom = $request->bedroom;
         $house->kitchen = $request->kitchen;
         $house->bathroom = $request->bathroom;
+        $house->floor = $request->floor;
         $house->toilet = $request->toilet;
         $house->balcony = $request->balcony;
         $house->price = $request->price;
@@ -98,6 +99,7 @@ class HouseController extends Controller
         $house->bedroom = $request->bedroom;
         $house->kitchen = $request->kitchen;
         $house->bathroom = $request->bathroom;
+        $house->floor = $request->floor;
         $house->toilet = $request->toilet;
         $house->balcony = $request->balcony;
         $house->price = $request->price;
