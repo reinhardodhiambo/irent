@@ -82,8 +82,6 @@
 <div class="flex-center position-ref full-height">
 
     <div class="top-right links">
-        <a href="<?php echo e(route('protection.membership')); ?>"><?php echo e(__('views.welcome.member_area')); ?></a>
-
         <?php if(Route::has('login')): ?>
             <?php if(!Auth::check()): ?>
                 <?php if(config('auth.users.registration')): ?>
