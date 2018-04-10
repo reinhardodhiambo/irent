@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Apartment;
+use App\House;
 use App\Models\Auth\User\User;
+use App\UserHouse;
 use Arcanedev\LogViewer\Entities\Log;
 use Arcanedev\LogViewer\Entities\LogEntry;
 use Carbon\Carbon;
@@ -20,6 +23,24 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    private function get_apartment_details($apartment_id)
+    {
+        $occupied = 0;
+        $vacant =0;
+        $houses = House::with('UserHouse')->where('apartment_id', $apartment_id)->get();
+        if ($houses) {
+            foreach ($houses as $house) {
+                $user_house = UserHouse::where('house_id',$house->id)->first();
+                if($user_house)
+                    $occupied++;
+                else
+                    $vacant++;
+            }
+        }
+
+        return (object)['vacant'=>$vacant,'occupied'=>$occupied,'total'=>$vacant+$occupied];
     }
 
     /**
@@ -42,7 +63,25 @@ class DashboardController extends Controller
             }
         }
 
-        return view('admin.dashboard', ['counts' => $counts]);
+        $apartments = null;
+        if(auth()->user()->hasRole('administrator')){
+            $apartments = Apartment::with('houses')->where('owner_id',auth()->user()->id)->get();
+            $apartments_array = [];
+            foreach ($apartments as $apartment){
+                $details = self::get_apartment_details($apartment->id);
+                $apartments_array[] =[
+                    'id'=>$apartment->id,
+                    'name'=> $apartment->name,
+                    'vacant'=>$details->vacant,
+                    'occupied'=>$details->occupied,
+                    'total_houses'=>$details->total,
+                ];
+            }
+            $apartments = json_decode(json_encode($apartments_array), FALSE);
+        }
+
+
+        return view('admin.dashboard', ['counts' => $counts,'apartments' => $apartments]);
     }
 
 

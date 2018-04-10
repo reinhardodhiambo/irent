@@ -23,16 +23,16 @@
                 <li role="presentation" class="dropdown open">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="true">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">{{count(auth()->user()->notifications)}}</span>
+                        <span class="badge bg-green">{{count(\App\Notification::get_notifications())}}</span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                        @foreach(auth()->user()->notifications as $notification)
+                        @foreach(\App\Notification::get_notifications() as $notification)
                         <li>
                             <a>
                                 {{--<span class="image"><img src="images/img.jpg" alt="Profile Image"></span>--}}
                                 <span>
-                          <span>{{ $notification->user->name}}</span>
-                          <span class="time">{{$notification->update_at}}</span>
+                          <span>{{$notification->user_name}}</span>
+                          {{--<span class="time">{{$notification->update_at}}</span>--}}
                         </span>
                                 <span class="message">
                           {{$notification->message}}

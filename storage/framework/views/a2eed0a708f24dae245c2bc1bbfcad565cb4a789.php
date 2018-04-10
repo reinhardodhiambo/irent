@@ -25,16 +25,16 @@
                 <li role="presentation" class="dropdown open">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="true">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green"><?php echo e(count(auth()->user()->notifications)); ?></span>
+                        <span class="badge bg-green"><?php echo e(count(\App\Notification::get_notifications())); ?></span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                        <?php $__currentLoopData = auth()->user()->notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = \App\Notification::get_notifications(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li>
                             <a>
                                 
                                 <span>
-                          <span><?php echo e($notification->user->name); ?></span>
-                          <span class="time"><?php echo e($notification->update_at); ?></span>
+                          <span><?php echo e($notification->user_name); ?></span>
+                          
                         </span>
                                 <span class="message">
                           <?php echo e($notification->message); ?>

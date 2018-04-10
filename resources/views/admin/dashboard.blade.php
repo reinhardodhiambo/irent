@@ -40,95 +40,91 @@
 
     <br/>
 
+
     <div class="row">
-        <div class="col-md-4 col-sm-4 col-xs-12">
-            <div id="registration_usage" class="x_panel tile fixed_height_320 overflow_hidden">
-                <div class="x_title">
-                    <h2>{{  __('views.admin.dashboard.sub_title_2') }}</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <table class="" style="width:100%">
-                        <tr>
-                            <th></th>
-                            <th>
-                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                    <p class="">{{  __('views.admin.dashboard.sub_title_3') }}</p>
-                                </div>
-                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                    <p class="">{{  __('views.admin.dashboard.sub_title_4') }}</p>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <canvas class="canvasChart" height="140" width="140" style="margin: 15px 10px 10px 0">
-                                </canvas>
-                            </td>
-                            <td>
-                                <table class="tile_info">
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square aero"></i>
-                                                <span class="tile_label">
-                                                     {{ __('views.admin.dashboard.source_0') }}
+        @foreach($apartments as $apartment)
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div id="registration_usage" class="x_panel tile fixed_height_320 overflow_hidden">
+                    <div class="x_title">
+                        <h2>{{$apartment->name}}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <table class="" style="width:100%">
+                            <tr>
+                                <th></th>
+                                <th>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                        <p class="">{{  __('views.admin.dashboard.sub_title_3') }}</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        <p class="">{{  __('views.admin.dashboard.sub_title_4') }}</p>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <canvas id="{{$apartment->id}}" class="canvasChart {{$apartment->id}}" height="140"
+                                            width="140" style="margin: 15px 10px 10px 0">
+                                    </canvas>
+                                </td>
+                                <td>
+                                    <table class="tile_info">
+                                        <tr>
+                                            <td>
+                                                <p><i class="fa fa-square aero"></i>
+                                                    <span class="tile_label">
+                                                     Empty Houses
                                                 </span>
-                                            </p>
-                                        </td>
-                                        <td id="registration_usage_from"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square red"></i>
-                                                <span class="tile_label">
-                                                    {{ __('views.admin.dashboard.source_1') }}
+                                                </p>
+                                            </td>
+                                            <td>{{$apartment->vacant}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p><i class="fa fa-square red"></i>
+                                                    <span class="tile_label">
+                                                    Occupied Houses
                                                 </span>
-                                            </p>
-                                        </td>
-                                        <td id="registration_usage_google"></td>
-                                    </tr>
-                                    @if(auth()->user()->hasRole('administrator'))
+                                                </p>
+                                            </td>
+                                            <td>{{$apartment->occupied}}</td>
+                                        </tr>
                                         <tr>
                                             <td>
                                                 <p><i class="fa fa-square blue"></i>
                                                     <span class="tile_label">
-                                                    {{ __('views.admin.dashboard.source_2') }}
+                                                    Total Houses
                                                 </span>
                                                 </p>
                                             </td>
-                                            <td id="registration_usage_facebook"></td>
+                                            <td>{{$apartment->total_houses}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <p><i class="fa fa-square grren"></i>
-                                                    <span class="tile_label">
-                                                     {{ __('views.admin.dashboard.source_3') }}
-                                                </span>
-                                                </p>
-                                            </td>
-                                            <td id="registration_usage_twitter"></td>
-                                        </tr>
-                                    @endif
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
+
+
+
+
 
 
 @endsection

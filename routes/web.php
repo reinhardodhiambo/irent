@@ -77,6 +77,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::get('dashboard/registration-chart', 'DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');
     Route::get('repairs/{apartment_id}/show', 'RepairController@index')->name('repairs.show');
     Route::post('repairs/{user_id}/{apartment_id}/create', 'RepairController@create')->name('repairstore');
+    Route::get('repairs/{repair}/view', 'RepairController@show')->name('repair.show');
+
     Route::get('payments/{apartment_id}/show', 'PaymentController@index')->name('payments.show');
     Route::post('payments/{user_id}/{apartment_id}/create', 'PaymentController@create')->name('paymentstore');
     Route::post('notifications/{user_id}/{apartment_id}/create', 'NotificationController@create')->name('notificationstore');

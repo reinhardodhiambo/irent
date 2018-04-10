@@ -2,8 +2,8 @@
 
 <?php $__env->startSection('content'); ?>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Repairs
-        </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Repairs
+    </button>
 
     <div class="row">
         <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
@@ -28,7 +28,7 @@
                     <?php endif; ?>
                     <td>
 
-                        <a class="btn btn-xs btn-primary" href=""
+                        <a class="btn btn-xs btn-primary" href="<?php echo e(route('admin.repair.show', [$repair->id])); ?>"
                            data-toggle="tooltip" data-placement="top"
                            data-title="<?php echo e(__('views.admin.users.index.show')); ?>">
                             <i class="fa fa-eye"></i>
@@ -39,7 +39,8 @@
                                data-title="<?php echo e(__('views.admin.users.index.edit')); ?>">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                            <a class="btn btn-xs btn-danger" href=""
+                            <a class="btn btn-xs btn-danger"
+                               href=""
                                data-toggle="tooltip" data-placement="top"
                                data-title="delete">
                                 <i class="fa fa-trash"></i>
@@ -69,7 +70,7 @@
                         <div class="login_wrapper">
                             <div class="animate form">
                                 <section class="login_content">
-                                    <?php echo e(Form::open(array('route' => array('admin.repairstore',auth()->user()->id,Request::route('apartment_id'))))); ?>
+                                    <?php echo e(Form::open(array('route' => array('admin.repairstore',auth()->user()->id,Request::route('apartment_id')),'files' => true))); ?>
 
                                     <form><h1>New Repair</h1>
                                         <div>
@@ -81,6 +82,9 @@
                                             <input type="text" name="description" class="form-control"
                                                    placeholder="description"
                                                    required/>
+                                        </div>
+                                        <div>
+                                            <input type="file" class="form-control" name="photos[]" multiple/>
                                         </div>
                                         <div>
                                             <button type="submit"
