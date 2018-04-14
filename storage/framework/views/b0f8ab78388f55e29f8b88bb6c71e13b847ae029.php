@@ -11,7 +11,7 @@
                 <span class="count_top"><i
                             class="fa fa-address-card"></i> <?php echo e(__('views.admin.dashboard.count_1')); ?></span>
                 <div>
-                    <span class="count green"><?php echo e($counts['users'] - $counts['users_unconfirmed']); ?></span>
+                    <span class="count green"><?php echo e(($counts['users'] - $counts['users_unconfirmed'])*-1); ?></span>
                     <span class="count">/</span>
                     <span class="count red"><?php echo e($counts['users_unconfirmed']); ?></span>
                 </div>
@@ -41,6 +41,46 @@
     <?php if(auth()->user()->hasRole('administrator')): ?>
     <div class="row">
         <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <canvas id="myChart<?php echo e($apartment->id); ?>" width="400" height="400"></canvas>
+            <script>
+                var ctx = document.getElementById("myChart<?php echo e($apartment->id); ?>");
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <div id="registration_usage" class="x_panel tile fixed_height_320 overflow_hidden">
                     <div class="x_title">
@@ -77,6 +117,7 @@
                                     <canvas id="<?php echo e($apartment->id); ?>" class="canvasChart <?php echo e($apartment->id); ?>" height="140"
                                             width="140" style="margin: 15px 10px 10px 0">
                                     </canvas>
+
                                 </td>
                                 <td>
                                     <table class="tile_info">

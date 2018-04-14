@@ -8,7 +8,14 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                       aria-expanded="true" >
+                       aria-expanded="true">
+                        @if(auth()->user()->hasRole('administrator'))
+                            <h6>LANDLORD:</h6>
+                        @elseif(auth()->user()->hasRole('caretaker'))
+                            <h6>CARETAKER:</h6>
+                        @else
+                            <h6>TENANT:</h6>
+                        @endif
                         <img src="{{ auth()->user()->avatar }}" alt="">{{ auth()->user()->name }}
                         <span class=" fa fa-angle-down"></span>
                     </a>
@@ -21,24 +28,25 @@
                     </ul>
                 </li>
                 <li role="presentation" class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="true">
+                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                       aria-expanded="true">
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge bg-green">{{count(\App\Notification::get_notifications())}}</span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                         @foreach(\App\Notification::get_notifications() as $notification)
-                        <li>
-                            <a>
-                                {{--<span class="image"><img src="images/img.jpg" alt="Profile Image"></span>--}}
-                                <span>
+                            <li>
+                                <a>
+                                    {{--<span class="image"><img src="images/img.jpg" alt="Profile Image"></span>--}}
+                                    <span>
                           <span>{{$notification->user_name}}</span>
-                          {{--<span class="time">{{$notification->update_at}}</span>--}}
+                                        {{--<span class="time">{{$notification->update_at}}</span>--}}
                         </span>
-                                <span class="message">
+                                    <span class="message">
                           {{$notification->message}}
                         </span>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
                         @endforeach
                         <li>
                             <div class="text-center">

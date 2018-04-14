@@ -1,4 +1,5 @@
 <?php $__env->startSection('content'); ?>
+    <div class="row"></div>
     <div class="row">
         <?php if(auth()->user()->hasRole('administrator')): ?>
             <button type="button " class="btn btn-primary fa fa-home" data-toggle="modal"
@@ -18,6 +19,7 @@
             <i class="fa fa-comment-o" aria-hidden="true"></i>
         </a>
     </div>
+    <div class="row"></div>
     <div class="row">
         <table class="table table-striped table-hover">
             <tbody>

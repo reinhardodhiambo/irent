@@ -8,7 +8,14 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                       aria-expanded="true" >
+                       aria-expanded="true">
+                        <?php if(auth()->user()->hasRole('administrator')): ?>
+                            <h6>LANDLORD:</h6>
+                        <?php elseif(auth()->user()->hasRole('caretaker')): ?>
+                            <h6>CARETAKER:</h6>
+                        <?php else: ?>
+                            <h6>TENANT:</h6>
+                        <?php endif; ?>
                         <img src="<?php echo e(auth()->user()->avatar); ?>" alt=""><?php echo e(auth()->user()->name); ?>
 
                         <span class=" fa fa-angle-down"></span>
@@ -23,25 +30,26 @@
                     </ul>
                 </li>
                 <li role="presentation" class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="true">
+                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                       aria-expanded="true">
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge bg-green"><?php echo e(count(\App\Notification::get_notifications())); ?></span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                         <?php $__currentLoopData = \App\Notification::get_notifications(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <li>
-                            <a>
-                                
-                                <span>
+                            <li>
+                                <a>
+                                    
+                                    <span>
                           <span><?php echo e($notification->user_name); ?></span>
-                          
+                                        
                         </span>
-                                <span class="message">
+                                    <span class="message">
                           <?php echo e($notification->message); ?>
 
                         </span>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <li>
                             <div class="text-center">
