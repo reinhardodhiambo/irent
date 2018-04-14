@@ -380,6 +380,7 @@ body {
     font-size: 16px;
     color: gray;
     cursor: pointer;
+
 }
 .chat .chat-message button {
     float: right;
