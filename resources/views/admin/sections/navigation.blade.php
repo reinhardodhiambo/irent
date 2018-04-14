@@ -14,6 +14,13 @@
                 <img src="{{ auth()->user()->avatar }}" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
+                @if(auth()->user()->hasRole('administrator'))
+                    <h2>LANDLORD:</h2>
+                @elseif(auth()->user()->hasRole('caretaker'))
+                    <h2>CARETAKER:</h2>
+                @else
+                    <h2>TENANT:</h2>
+                @endif
                 <h2>{{ auth()->user()->name }}</h2>
             </div>
         </div>

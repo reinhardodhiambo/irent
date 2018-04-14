@@ -38,7 +38,7 @@
 
     <br/>
 
-
+    <?php if(auth()->user()->hasRole('administrator')): ?>
     <div class="row">
         <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -119,6 +119,7 @@
             </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
+    <?php endif; ?>
 
 
 

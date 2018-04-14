@@ -3,16 +3,21 @@
 <?php $__env->startSection('content'); ?>
     <div class="row">
         <?php if(auth()->user()->hasRole('administrator')): ?>
-            <button type="button " class="btn btn-primary fa fa-home" data-toggle="modal" data-target=".bs-example-modal-lg">
+            <button type="button " class="btn btn-primary fa fa-home" data-toggle="modal"
+                    data-target=".bs-example-modal-lg">
             </button>
         <?php endif; ?>
-        <button type="button" class="btn btn-primary fa fa-envelope" data-toggle="modal" data-target=".bs-example-modal-lk">
+        <button type="button" class="btn btn-primary fa fa-envelope" data-toggle="modal"
+                data-target=".bs-example-modal-lk">
         </button>
         <a class="btn btn-primary" href="<?php echo e(route('admin.repairs.show', [$apartment->id])); ?>">
             <i class="fa fa-briefcase" aria-hidden="true"></i>
         </a>
         <a class="btn btn-primary" href="<?php echo e(route('admin.payments.show', [$apartment->id])); ?>">
             <i class="fa fa-money" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-primary" href="<?php echo e(route('admin.chats.show', [$apartment->id])); ?>">
+            <i class="fa fa-comment-o" aria-hidden="true"></i>
         </a>
     </div>
     <div class="row">
@@ -68,36 +73,36 @@
             <tbody>
             <?php $__currentLoopData = $apartment->houses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $house): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php if(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('caretaker') || App\Http\Controllers\Admin\HouseController::getUserHouses($house->id,auth()->user()->id)): ?>
-                <tr>
-                    <td><?php echo e($house->house_number); ?></td>
-                    <td><?php echo e($house->floor); ?></td>
-                    <td>
-                        <?php if(!isset($house->UserHouse->user_id)): ?><span class="label label-warning">Vacant</span>
-                        <?php else: ?>
-                            <span class="label label-success">Not Vacant</span>
-                        <?php endif; ?>
-                    </td>
-                    <td>
+                    <tr>
+                        <td><?php echo e($house->house_number); ?></td>
+                        <td><?php echo e($house->floor); ?></td>
+                        <td>
+                            <?php if(!isset($house->UserHouse->user_id)): ?><span class="label label-warning">Vacant</span>
+                            <?php else: ?>
+                                <span class="label label-success">Not Vacant</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
 
-                        <a class="btn btn-xs btn-primary" href="<?php echo e(route('admin.houses.show', [$house->id])); ?>"
-                           data-toggle="tooltip" data-placement="top"
-                           data-title="<?php echo e(__('views.admin.users.index.show')); ?>">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                        <?php if(auth()->user()->hasRole('administrator')): ?>
-                            <a class="btn btn-xs btn-info" href="<?php echo e(route('admin.house.edit', [$house->id])); ?>"
+                            <a class="btn btn-xs btn-primary" href="<?php echo e(route('admin.houses.show', [$house->id])); ?>"
                                data-toggle="tooltip" data-placement="top"
-                               data-title="<?php echo e(__('views.admin.users.index.edit')); ?>">
-                                <i class="fa fa-pencil"></i>
+                               data-title="<?php echo e(__('views.admin.users.index.show')); ?>">
+                                <i class="fa fa-eye"></i>
                             </a>
-                            <a class="btn btn-xs btn-danger" href="<?php echo e(route('admin.houses.delete', [$house->id])); ?>"
-                               data-toggle="tooltip" data-placement="top"
-                               data-title="delete">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        <?php endif; ?>
-                    </td>
-                </tr>
+                            <?php if(auth()->user()->hasRole('administrator')): ?>
+                                <a class="btn btn-xs btn-info" href="<?php echo e(route('admin.house.edit', [$house->id])); ?>"
+                                   data-toggle="tooltip" data-placement="top"
+                                   data-title="<?php echo e(__('views.admin.users.index.edit')); ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a class="btn btn-xs btn-danger" href="<?php echo e(route('admin.houses.delete', [$house->id])); ?>"
+                                   data-toggle="tooltip" data-placement="top"
+                                   data-title="delete">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
                 <?php endif; ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>

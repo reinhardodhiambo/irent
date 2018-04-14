@@ -8,7 +8,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                       aria-expanded="false">
+                       aria-expanded="true" >
                         <img src="<?php echo e(auth()->user()->avatar); ?>" alt=""><?php echo e(auth()->user()->name); ?>
 
                         <span class=" fa fa-angle-down"></span>
@@ -22,7 +22,7 @@
                         </li>
                     </ul>
                 </li>
-                <li role="presentation" class="dropdown open">
+                <li role="presentation" class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="true">
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge bg-green"><?php echo e(count(\App\Notification::get_notifications())); ?></span>
@@ -45,7 +45,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <li>
                             <div class="text-center">
-                                <a>
+                                <a href="<?php echo e(route('admin.notifications')); ?>">
                                     <strong>See All Notifications</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>

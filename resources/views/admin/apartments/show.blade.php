@@ -5,16 +5,21 @@
 @section('content')
     <div class="row">
         @if(auth()->user()->hasRole('administrator'))
-            <button type="button " class="btn btn-primary fa fa-home" data-toggle="modal" data-target=".bs-example-modal-lg">
+            <button type="button " class="btn btn-primary fa fa-home" data-toggle="modal"
+                    data-target=".bs-example-modal-lg">
             </button>
         @endif
-        <button type="button" class="btn btn-primary fa fa-envelope" data-toggle="modal" data-target=".bs-example-modal-lk">
+        <button type="button" class="btn btn-primary fa fa-envelope" data-toggle="modal"
+                data-target=".bs-example-modal-lk">
         </button>
         <a class="btn btn-primary" href="{{ route('admin.repairs.show', [$apartment->id]) }}">
             <i class="fa fa-briefcase" aria-hidden="true"></i>
         </a>
         <a class="btn btn-primary" href="{{ route('admin.payments.show', [$apartment->id]) }}">
             <i class="fa fa-money" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-primary" href="{{ route('admin.chats.show', [$apartment->id]) }}">
+            <i class="fa fa-comment-o" aria-hidden="true"></i>
         </a>
     </div>
     <div class="row">
@@ -68,36 +73,36 @@
             <tbody>
             @foreach($apartment->houses as $house)
                 @if(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('caretaker') || App\Http\Controllers\Admin\HouseController::getUserHouses($house->id,auth()->user()->id))
-                <tr>
-                    <td>{{ $house->house_number }}</td>
-                    <td>{{ $house->floor }}</td>
-                    <td>
-                        @if(!isset($house->UserHouse->user_id))<span class="label label-warning">Vacant</span>
-                        @else
-                            <span class="label label-success">Not Vacant</span>
-                        @endif
-                    </td>
-                    <td>
+                    <tr>
+                        <td>{{ $house->house_number }}</td>
+                        <td>{{ $house->floor }}</td>
+                        <td>
+                            @if(!isset($house->UserHouse->user_id))<span class="label label-warning">Vacant</span>
+                            @else
+                                <span class="label label-success">Not Vacant</span>
+                            @endif
+                        </td>
+                        <td>
 
-                        <a class="btn btn-xs btn-primary" href="{{ route('admin.houses.show', [$house->id]) }}"
-                           data-toggle="tooltip" data-placement="top"
-                           data-title="{{ __('views.admin.users.index.show') }}">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                        @if(auth()->user()->hasRole('administrator'))
-                            <a class="btn btn-xs btn-info" href="{{ route('admin.house.edit', [$house->id]) }}"
+                            <a class="btn btn-xs btn-primary" href="{{ route('admin.houses.show', [$house->id]) }}"
                                data-toggle="tooltip" data-placement="top"
-                               data-title="{{ __('views.admin.users.index.edit') }}">
-                                <i class="fa fa-pencil"></i>
+                               data-title="{{ __('views.admin.users.index.show') }}">
+                                <i class="fa fa-eye"></i>
                             </a>
-                            <a class="btn btn-xs btn-danger" href="{{ route('admin.houses.delete', [$house->id]) }}"
-                               data-toggle="tooltip" data-placement="top"
-                               data-title="delete">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        @endif
-                    </td>
-                </tr>
+                            @if(auth()->user()->hasRole('administrator'))
+                                <a class="btn btn-xs btn-info" href="{{ route('admin.house.edit', [$house->id]) }}"
+                                   data-toggle="tooltip" data-placement="top"
+                                   data-title="{{ __('views.admin.users.index.edit') }}">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a class="btn btn-xs btn-danger" href="{{ route('admin.houses.delete', [$house->id]) }}"
+                                   data-toggle="tooltip" data-placement="top"
+                                   data-title="delete">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            @endif
+                        </td>
+                    </tr>
                 @endif
             @endforeach
             </tbody>

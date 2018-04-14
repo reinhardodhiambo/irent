@@ -40,7 +40,7 @@
 
     <br/>
 
-
+    @if(auth()->user()->hasRole('administrator'))
     <div class="row">
         @foreach($apartments as $apartment)
             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -121,6 +121,7 @@
             </div>
         @endforeach
     </div>
+    @endif
 
 
 

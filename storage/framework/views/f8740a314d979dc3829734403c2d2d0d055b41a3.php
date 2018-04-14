@@ -14,6 +14,13 @@
                 <img src="<?php echo e(auth()->user()->avatar); ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
+                <?php if(auth()->user()->hasRole('administrator')): ?>
+                    <h2>LANDLORD:</h2>
+                <?php elseif(auth()->user()->hasRole('caretaker')): ?>
+                    <h2>CARETAKER:</h2>
+                <?php else: ?>
+                    <h2>TENANT:</h2>
+                <?php endif; ?>
                 <h2><?php echo e(auth()->user()->name); ?></h2>
             </div>
         </div>

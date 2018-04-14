@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Notification;
+use App\Apartment;
+use App\Chat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class NotificationController extends Controller
+class ChatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Notification::get_notifications();
-        return view('admin.notifications.index', ['notifications' => $notifications]);
-
+        //
     }
 
     /**
@@ -25,16 +24,16 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $user_id, $apartment_id)
+    public function create(Request $request, $apartment_id)
     {
-        $payment = new Notification([
-            'message' => $request->get('message'),
-            'user_id' => $user_id,
-            'apartment_id' => $apartment_id
-        ]);
+        $chat = new Chat;
+        $chat->apartment_id = $apartment_id;
+        $chat->user_id = auth()->user()->id;
+        $chat->user_name = auth()->user()->name;
+        $chat->message = $request->message;
+        $chat->save();
 
-        $payment->save();
-        return redirect('/admin/apartments/'.$apartment_id.'/show');
+        return back()->withInput();
     }
 
     /**
@@ -51,12 +50,14 @@ class NotificationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Apartment $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        $chats = Chat::where('apartment_id',$apartment->id)->get();
+        return view('admin.chat.show', ['chats' => $chats,'apartment_name'=>$apartment->name,'apartment_id'=>$apartment->id]);
+
     }
 
     /**

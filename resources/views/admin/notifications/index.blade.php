@@ -1,10 +1,8 @@
 @extends('admin.layouts.admin')
 
-@section('title', __('views.admin.users.show.title', ['name' => 'Repairs']))
-
 @section('content')
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Repairs
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Notification
     </button>
 
     <div class="row">
@@ -12,25 +10,24 @@
                width="100%">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Status</th>
+                <th>User</th>
+                <th>Message</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($repairs as $repair)
+            @foreach($notifications as $notification)
                 <tr>
-                    <td>{{ $repair->name }}</td>
-                    <td>{{ $repair->description }}</td>
-                    @if($repair->price>0)
-                        <td><span class="label label-success">Repaired</span></td>
+                    <td>{{ $notification->user_name }}</td>
+                    <td>{{ $notification->message }}</td>
+                    @if($notification->user_id==auth()->user()->id)
+                        <td><span class="label label-success">Read</span></td>
                     @else
-                        <td><span class="label label-warning">Not Repaired</span></td>
+                        <td><span class="label label-warning">Unread</span></td>
                     @endif
                     <td>
 
-                        <a class="btn btn-xs btn-primary" href="{{ route('admin.repair.show', [$repair->id]) }}"
+                        <a class="btn btn-xs btn-primary" href="{{--{{ route('admin.repair.show', [$repair->id]) }}--}}"
                            data-toggle="tooltip" data-placement="top"
                            data-title="{{ __('views.admin.users.index.show') }}">
                             <i class="fa fa-eye"></i>
@@ -65,27 +62,20 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">New Repair</h4>
+                    <h4 class="modal-title" id="myModalLabel">New Notification</h4>
                 </div>
                 <div class="modal-body">
+
                     <div class="row">
                         <div class="login_wrapper">
                             <div class="animate form">
                                 <section class="login_content">
-                                    {{ Form::open(array('route' => array('admin.repairstore',auth()->user()->id,Request::route('apartment_id')),'files' => true)) }}
-                                    <form><h1>New Repair</h1>
+                                    {{ Form::open(array('route' => array('admin.notificationstore',auth()->user()->id,Request::route('apartment')))) }}
+                                    <form><h1>New Notification</h1>
                                         <div>
-                                            <input type="text" name="name" class="form-control"
-                                                   placeholder="name"
-                                                   value="{{ old('name') }}" required autofocus/>
-                                        </div>
-                                        <div>
-                                            <input type="text" name="description" class="form-control"
-                                                   placeholder="description"
+                                            <input type="text" name="message" class="form-control"
+                                                   placeholder="message"
                                                    required/>
-                                        </div>
-                                        <div>
-                                            <input type="file" class="form-control" name="photos[]" multiple/>
                                         </div>
                                         <div>
                                             <button type="submit"

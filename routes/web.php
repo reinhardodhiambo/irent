@@ -78,11 +78,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::get('repairs/{apartment_id}/show', 'RepairController@index')->name('repairs.show');
     Route::post('repairs/{user_id}/{apartment_id}/create', 'RepairController@create')->name('repairstore');
     Route::get('repairs/{repair}/view', 'RepairController@show')->name('repair.show');
-
     Route::get('payments/{apartment_id}/show', 'PaymentController@index')->name('payments.show');
     Route::post('payments/{user_id}/{apartment_id}/create', 'PaymentController@create')->name('paymentstore');
     Route::post('notifications/{user_id}/{apartment_id}/create', 'NotificationController@create')->name('notificationstore');
+    Route::get('notifications', 'NotificationController@index')->name('notifications');
     Route::post('house/{house_id}/rent', 'HouseController@rentUser')->name('house.rent');
+    Route::get('chat/{apartment}/show', 'ChatController@show')->name('chats.show');
+    Route::post('chat/{apartment_id}/new', 'ChatController@create')->name('chats.new');
 });
 
 

@@ -21,21 +21,22 @@ class Notification extends Model
         $apartments = Apartment::all();
         $notifications = [];
         foreach ($apartments as $apartment) {
-            if ($apartment->owner_id === auth()->user()->id || ApartmentController::getUserApartments($apartment->id, auth()->user()->id)) {
+            $AC = new ApartmentController();
+            if ($AC::getUserApartments($apartment->id, auth()->user()->id) || $apartment->owner_id === auth()->user()->id) {
                 $notification = Notification::where('apartment_id', $apartment->id)->get();
 
-                foreach ($notification as $not)
-                    $user = User::where('id',$not->user_id)->first();
+                foreach ($notification as $not) {
+                    $user = User::where('id', $not->user_id)->first();
                     $notifications [] = [
-                        'user_id'=>$not->user_id,
-                        'user_name'=>$user->name,
-                        'to_user_id'=>$not->to_user_id,
-                        'title'=>$not->title,
-                        'message'=>$not->message,
-                        'created_at'=>$not->created_at,
-                        'updated_at'=>$not->updated_at,
+                        'user_id' => $not->user_id,
+                        'user_name' => $user->name,
+                        'to_user_id' => $not->to_user_id,
+                        'title' => $not->title,
+                        'message' => $not->message,
+                        'created_at' => $not->created_at,
+                        'updated_at' => $not->updated_at,
                     ];
-
+                }
             }
         }
 
