@@ -22,8 +22,8 @@ composer.phar
 phpunit.phar
 
 #unignored this two for heroku
-public/assets
-public/mix-manifest.json
+#public/assets
+#public/mix-manifest.json
 
 .env
 .env.*.php
