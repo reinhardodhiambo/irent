@@ -3098,6 +3098,8 @@ th {
     width: 100%;
     max-width: 100%;
     margin-bottom: 20px;
+    color: black;
+    font-size: 17px;
 }
 
 .table > thead > tr > th,
@@ -12169,7 +12171,7 @@ html, body {
 }
 
 body .container.body .right_col {
-    background: beige;
+    background: rgb(203, 189, 255);
     /*background-image: url("../../../assets/images/background.jpg");*/
     /*background-repeat: no-repeat;*/
     /*-webkit-background-size: 100%;*/
@@ -12514,8 +12516,8 @@ table.no-margin .progress {
 }
 
 .row {
-    margin-right: -10px;
-    margin-left: -10px
+    margin-right: 1%;
+    margin-left: 1%;
 }
 
 .grid_slider .col-md-6 {

@@ -1,5 +1,3 @@
-<?php $__env->startSection('title', __('views.admin.users.show.title', ['name' => $apartment->name])); ?>
-
 <?php $__env->startSection('content'); ?>
     <div class="row">
         <?php if(auth()->user()->hasRole('administrator')): ?>

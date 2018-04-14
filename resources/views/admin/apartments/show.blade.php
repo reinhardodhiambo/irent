@@ -1,6 +1,5 @@
 @extends('admin.layouts.admin')
 
-@section('title', __('views.admin.users.show.title', ['name' => $apartment->name]))
 
 @section('content')
     <div class="row">
