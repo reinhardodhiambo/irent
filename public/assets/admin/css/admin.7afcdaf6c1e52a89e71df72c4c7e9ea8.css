@@ -12169,11 +12169,11 @@ html, body {
 }
 
 body .container.body .right_col {
-    /*background: #F7F7;*/
-    background-image: url("../../../assets/images/background.jpg");
-    background-repeat: no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
+    background: beige;
+    /*background-image: url("../../../assets/images/background.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*-webkit-background-size: 100%;*/
+    /*background-size: 100%;*/
 }
 
 .nav-md .container.body .right_col {
