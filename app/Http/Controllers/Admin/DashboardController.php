@@ -143,6 +143,6 @@ class DashboardController extends Controller
             })->count(),
         ];
 
-        return response($data);
+       return response($data);
     }
 }

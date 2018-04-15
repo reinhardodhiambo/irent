@@ -41,46 +41,7 @@
     <?php if(auth()->user()->hasRole('administrator')): ?>
     <div class="row">
         <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <canvas id="myChart<?php echo e($apartment->id); ?>" width="400" height="400"></canvas>
-            <script>
-                var ctx = document.getElementById("myChart<?php echo e($apartment->id); ?>");
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true
-                                }
-                            }]
-                        }
-                    }
-                });
-            </script>
+
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <div id="registration_usage" class="x_panel tile fixed_height_320 overflow_hidden">
                     <div class="x_title">
@@ -100,6 +61,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+
                         <table class="" style="width:100%">
                             <tr>
                                 <th></th>
@@ -117,6 +79,47 @@
                                     <canvas id="<?php echo e($apartment->id); ?>" class="canvasChart <?php echo e($apartment->id); ?>" height="140"
                                             width="140" style="margin: 15px 10px 10px 0">
                                     </canvas>
+                                    <script>
+                                        var registrationUsage = {
+                                            _defaults: {
+                                                type: 'doughnut',
+                                                tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+                                                data: {
+                                                    labels: [],
+                                                    datasets: [{
+                                                        data: [],
+                                                        backgroundColor: [
+                                                            "#3498DB",
+                                                            "#3498DB",
+                                                            "#9B59B6",
+                                                            "#E74C3C",
+                                                        ],
+                                                        hoverBackgroundColor: [
+                                                            "#36CAAB",
+                                                            "#49A9EA",
+                                                            "#B370CF",
+                                                            "#E95E4F",
+                                                        ]
+                                                    }]
+                                                },
+                                                options: {
+                                                    legend: false,
+                                                    responsive: false
+                                                }
+                                            },
+                                            init: function ($el) {
+                                                var self = this;
+                                                $el = $($el);
+
+                                                self._defaults.data.datasets[0].data = [1, 2, 3, 4];
+
+                                                new Chart($el.find('.canvasChart<?php echo e($apartment->id); ?>'), self._defaults);
+                                            }
+
+                                        }
+                                        };
+                                        registrationUsage.init($('#registration_usage'));
+                                    </script>
 
                                 </td>
                                 <td>

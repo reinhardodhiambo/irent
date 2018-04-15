@@ -1,7 +1,6 @@
 <?php $__env->startSection('title', __('views.admin.users.show.title', ['name' => 'Repairs'])); ?>
 
 <?php $__env->startSection('content'); ?>
-
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Repairs
     </button>
 
@@ -27,7 +26,6 @@
                         <td><span class="label label-warning">Not Repaired</span></td>
                     <?php endif; ?>
                     <td>
-
                         <a class="btn btn-xs btn-primary" href="<?php echo e(route('admin.repair.show', [$repair->id])); ?>"
                            data-toggle="tooltip" data-placement="top"
                            data-title="<?php echo e(__('views.admin.users.index.show')); ?>">
