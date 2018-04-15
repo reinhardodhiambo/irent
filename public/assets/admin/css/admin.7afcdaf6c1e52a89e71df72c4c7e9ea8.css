@@ -235,7 +235,7 @@ th {
 body {
     background: #c5ddeb;
     font: 14px/20px "Lato", Arial, sans-serif;
-    padding: 40px 0;
+    /*padding: 40px 0;*/
     color: white;
 }
 .chat_container {
@@ -12171,7 +12171,7 @@ html, body {
 }
 
 body .container.body .right_col {
-    background: rgb(203, 189, 255);
+    background: rgb(192, 191, 193);
     /*background-image: url("../../../assets/images/background.jpg");*/
     /*background-repeat: no-repeat;*/
     /*-webkit-background-size: 100%;*/
