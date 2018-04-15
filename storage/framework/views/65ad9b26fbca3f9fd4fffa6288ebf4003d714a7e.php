@@ -80,9 +80,10 @@
             </tbody>
         </table>
     </div>
-
+<?php if(auth()->user()->hasRole('administrator') || auth()->user()->hasRole('administrator')): ?>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lk">Add Tenant
     </button>
+    <?php endif; ?>
 
     <div class="modal fade bs-example-modal-lk" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
