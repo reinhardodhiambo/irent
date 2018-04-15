@@ -34,7 +34,7 @@ class NotificationController extends Controller
         ]);
 
         $payment->save();
-        return redirect('/admin/apartments/'.$apartment_id.'/show');
+        return redirect('/admin/notifications');
     }
 
     /**
