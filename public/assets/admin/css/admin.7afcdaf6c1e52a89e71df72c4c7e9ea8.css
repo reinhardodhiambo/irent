@@ -3099,7 +3099,7 @@ th {
     max-width: 100%;
     margin-bottom: 20px;
     color: black;
-    font-size: 17px;
+    /*font-size: 17px;*/
 }
 
 .table > thead > tr > th,
