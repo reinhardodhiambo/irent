@@ -15,9 +15,14 @@
         <a class="btn btn-primary" href="{{ route('admin.repairs.show', [$apartment->id]) }}">
             <i class="fa fa-briefcase" aria-hidden="true"></i>
         </a>
-        <a class="btn btn-primary" href="{{ route('admin.payments.show', [$apartment->id]) }}">
+
+            <button type="button" class="btn btn-primary fa fa-money" data-toggle="modal"
+                    data-target=".bs-example-modal-lp">
+            </button>
+
+       {{-- <a class="btn btn-primary" href="{{ route('admin.payments.show', [$apartment->id]) }}">
             <i class="fa fa-money" aria-hidden="true"></i>
-        </a>
+        </a>--}}
         <a class="btn btn-primary" href="{{ route('admin.chats.show', [$apartment->id]) }}">
             <i class="fa fa-comment-o" aria-hidden="true"></i>
         </a>
@@ -269,6 +274,45 @@
                                     </form>
 
                                     {{ Form::close() }}
+                                </section>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade bs-example-modal-lp" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">New Payment</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="login_wrapper">
+                            <div class="animate form">
+                                <section class="login_content">
+                                    <form method="POST" id="payment-form"
+                                          action="{!! URL::to('paypal') !!}">
+                                        <h2>Paywith Paypal</h2>
+                                        {{ csrf_field() }}
+                                        <label><b>Enter Amount</b></label>
+                                        <input id="amount" type="text" name="amount"></p>
+                                        <button>Pay with PayPal</button>
+                                    </form>
                                 </section>
                             </div>
                         </div>

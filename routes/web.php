@@ -113,3 +113,9 @@ Route::get("user/{id}/delete", [
     "as" => "admin.user.delete",
     "uses" => "Admin\UserController@destroy"
 ]);
+
+// route for processing payment
+Route::post('paypal', 'PaymentController@payWithpaypal');
+
+// route for check status of the payment
+Route::get('status', 'PaymentController@getPaymentStatus');

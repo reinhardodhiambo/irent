@@ -17,18 +17,6 @@
       'Socialite' => 'Laravel\\Socialite\\Facades\\Socialite',
     ),
   ),
-  'laravelcollective/html' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Collective\\Html\\HtmlServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Form' => 'Collective\\Html\\FormFacade',
-      'Html' => 'Collective\\Html\\HtmlFacade',
-    ),
-  ),
   'barryvdh/laravel-ide-helper' => 
   array (
     'providers' => 
@@ -50,11 +38,34 @@
       0 => 'Kyslik\\ColumnSortable\\ColumnSortableServiceProvider',
     ),
   ),
+  'creativeorange/gravatar' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Creativeorange\\Gravatar\\GravatarServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Gravatar' => 'Creativeorange\\Gravatar\\Facades\\Gravatar',
+    ),
+  ),
   'laravel/tinker' => 
   array (
     'providers' => 
     array (
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    ),
+  ),
+  'laravelcollective/html' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Collective\\Html\\HtmlServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Form' => 'Collective\\Html\\FormFacade',
+      'Html' => 'Collective\\Html\\HtmlFacade',
     ),
   ),
 );
