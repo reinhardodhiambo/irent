@@ -4,6 +4,9 @@
             <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
+            <div class="nav toggle">
+                <a id="menu_toggle" href="<?php echo e(URL::previous()); ?>"><i class="fa fa-arrow-left"></i></a>
+            </div>
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="">

@@ -9,18 +9,21 @@
         <button type="button" class="btn btn-primary fa fa-envelope" data-toggle="modal"
                 data-target=".bs-example-modal-lk">
         </button>
+
         <a class="btn btn-primary" href="<?php echo e(route('admin.repairs.show', [$apartment->id])); ?>">
             <i class="fa fa-briefcase" aria-hidden="true"></i>
         </a>
 
-            <button type="button" class="btn btn-primary fa fa-money" data-toggle="modal"
-                    data-target=".bs-example-modal-lp">
-            </button>
-
-       
-        <a class="btn btn-primary" href="<?php echo e(route('admin.chats.show', [$apartment->id])); ?>">
-            <i class="fa fa-comment-o" aria-hidden="true"></i>
+        
+        <a class="btn btn-primary" href="<?php echo e(route('admin.payments.show', [$apartment->id])); ?>">
+            <i class="fa fa-money" aria-hidden="true"></i>
         </a>
+        
+        <?php if(auth()->user()->hasRole('authenticated')): ?>
+            <a class="btn btn-primary" href="<?php echo e(route('admin.chats.show', [$apartment->id])); ?>">
+                <i class="fa fa-comment-o" aria-hidden="true"></i>
+            </a>
+        <?php endif; ?>
     </div>
     <div class="row"></div>
     <div class="row">
@@ -46,6 +49,24 @@
 
                 </td>
             </tr>
+            <?php if(auth()->user()->hasRole('administrator')): ?>
+                <tr>
+                    <th>Caretaker</th>
+                    <td>
+                        <?php if($apartment->caretaker_id==0): ?>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target=".bs-example-modal-cr">Add Caretaker
+                            </button>
+                        <?php else: ?>
+                            <?php echo e($caretaker->name); ?>
+
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target=".bs-example-modal-cr">Change Caretaker
+                            </button>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
 
             <tr>
                 <th>Created At</th>
@@ -75,7 +96,7 @@
             </thead>
             <tbody>
             <?php $__currentLoopData = $apartment->houses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $house): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php if(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('caretaker') || App\Http\Controllers\Admin\HouseController::getUserHouses($house->id,auth()->user()->id)): ?>
+                <?php if(auth()->user()->id===$apartment->owner_id ||auth()->user()->id === $apartment->caretaker_id || App\Http\Controllers\Admin\HouseController::getUserHouses($house->id,auth()->user()->id)): ?>
                     <tr>
                         <td><?php echo e($house->house_number); ?></td>
                         <td><?php echo e($house->floor); ?></td>
@@ -315,6 +336,57 @@
                                         <input id="amount" type="text" name="amount"></p>
                                         <button>Pay with PayPal</button>
                                     </form>
+                                </section>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade bs-example-modal-cr" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-cr">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Caretaker</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="login_wrapper">
+                            <div class="animate form">
+                                <section class="login_content">
+                                    <?php echo e(Form::open(['url' => 'admin/apartments/'.$apartment->id.'/add_caretaker','method'=>'post'])); ?>
+
+                                    <form><h1>Select Caretaker</h1>
+                                        <div>
+                                            <select id="caretaker" name="caretaker" class="form-control" required="">
+                                                <option value="">Select Caretaker</option>
+                                                <?php $__currentLoopData = $caretakers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $caretaker): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value=<?php echo e($caretaker->id); ?>><?php echo e($caretaker->name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <button type="submit"
+                                                    class="btn btn-default submit">Process
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <?php echo e(Form::close()); ?>
+
                                 </section>
                             </div>
                         </div>

@@ -4,50 +4,72 @@
 
 @section('content')
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Payments
-        </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Payments
+    </button>
 
     <div class="row">
+        {{ Form::open(array('route' => array('admin.payments.search',Request::route('apartment_id')))) }}
+        <div style="background: #878688;padding:2%; margin-bottom: 2%">
+            <form><h5 style="color:black">Search</h5>
+                {{--<div>
+                    <input type="text" name="house_number" class="form-control"
+                           placeholder="House Number"
+                            autofocus/>
+                </div>
+                <div style="margin-bottom: 2%">
+                    <label style="color:black">
+                        <input name="status" type="radio" value=0>Paid
+                    </label>
+                    <label style="color:black">
+                        <input name="status" type="radio" value=1>Unpaid
+                    </label>
+                </div>--}}
+                <div style="margin-bottom: 2%">
+                    <input type="text" name="date" class="form-control"
+                           placeholder="Date"
+                    />
+                </div>
+                <div>
+                    <button type="submit"
+                            class="btn btn-default submit">Search
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {{ Form::close() }}
+
         <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                width="100%">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Action</th>
+                <th>House Number</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             @foreach($payments as $payment)
                 <tr>
-                    <td>{{ $payment->name }}</td>
-                    <td>{{ $payment->description }}</td>
-                    <td>{{ $payment->amount }}</td>
+                    <td>{{ $payment->house->house_number}}</td>
+                    <td> @if($payment->status==0)<h4><span class="label label-warning">Unpaid</span></h4>
+                        @else
+                            <h4><span class="label label-success">Paid</span></h4>
+                        @endif</td>
+                    <td>{{ $payment->created_at}}</td>
                     <td>
-
-                        <a class="btn btn-xs btn-primary" href="{{--{{ route('admin.houses.show', [$payment->id]) }}--}}"
+                        <a class="btn btn-xs btn-primary" href="{{ route('admin.payment.show', [$payment->id]) }}"
                            data-toggle="tooltip" data-placement="top"
                            data-title="{{ __('views.admin.users.index.show') }}">
                             <i class="fa fa-eye"></i>
                         </a>
-                        @if(auth()->user()->hasRole('administrator'))
-                            <a class="btn btn-xs btn-info" href="{{--{{ route('admin.house.edit', [$payment->id]) }}--}}"
-                               data-toggle="tooltip" data-placement="top"
-                               data-title="{{ __('views.admin.users.index.edit') }}">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                            <a class="btn btn-xs btn-danger" href="{{--{{ route('admin.houses.delete', [$payment->id]) }}--}}"
-                               data-toggle="tooltip" data-placement="top"
-                               data-title="delete">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        @endif
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+        {!! $payments->appends(\Request::except('page'))->render() !!}
 
         <div class="pull-right">
         </div>
@@ -68,7 +90,7 @@
                         <div class="login_wrapper">
                             <div class="animate form">
                                 <section class="login_content">
-                                    {{ Form::open(array('route' => array('admin.paymentstore',auth()->user()->id,Request::route('apartment_id')))) }}
+                                    {{ Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $payments[0]->apartment_id), 'files' => true)) }}
                                     <form><h1>New Payment</h1>
                                         <div>
                                             <input type="text" name="name" class="form-control"
@@ -84,6 +106,9 @@
                                             <input type="text" name="amount" class="form-control"
                                                    placeholder="amount"
                                                    required/>
+                                        </div>
+                                        <div>
+                                            <input type="file" class="form-control" name="photos[]" multiple/>
                                         </div>
                                         <div>
                                             <button type="submit"

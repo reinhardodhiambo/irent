@@ -30,6 +30,7 @@
 
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <?php if(!auth()->user()->hasRole('caretaker')): ?>
             <div class="menu_section">
                 <h3><?php echo e(__('views.backend.section.navigation.sub_header_0')); ?></h3>
                 <ul class="nav side-menu">
@@ -40,8 +41,15 @@
 
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo e(route('admin.kra')); ?>">
+                            <i class="fa fa-percent" aria-hidden="true"></i>
+                            KRA
+                        </a>
+                    </li>
                 </ul>
             </div>
+            <?php endif; ?>
             <div class="menu_section">
                 <h3><?php echo e(__('views.backend.section.navigation.sub_header_1')); ?></h3>
                 <ul class="nav side-menu">

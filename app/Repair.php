@@ -11,7 +11,6 @@ class Repair extends Model
 
     public function photos()
     {
-
         return $this->hasMany('App\RepairPhoto');
     }
 

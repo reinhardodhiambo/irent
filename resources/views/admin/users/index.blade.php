@@ -61,7 +61,7 @@
             <tbody>
             @foreach($users as $user)
 
-                @if($user->hasRole('caretaker'))
+                @if($user->hasRole('caretaker') && $user->owner_id==auth()->user()->id)
                     <tr>
                         <td>{{ $user->email }}</td>
                         <td>

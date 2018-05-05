@@ -1,16 +1,29 @@
-<?php $__env->startSection('title', __('views.admin.users.show.title', ['name' => 'Payment'])); ?>
+@extends('admin.layouts.admin')
 
-<?php $__env->startSection('content'); ?>
+@section('title', __('views.admin.users.show.title', ['name' => 'Payment']))
+
+@section('content')
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Payments
     </button>
 
     <div class="row">
-        <?php echo e(Form::open(array('route' => array('admin.payments.search',Request::route('apartment_id'))))); ?>
-
+        {{ Form::open(array('route' => array('admin.payments.search',Request::route('apartment_id')))) }}
         <div style="background: #878688;padding:2%; margin-bottom: 2%">
             <form><h5 style="color:black">Search</h5>
-                
+                {{--<div>
+                    <input type="text" name="house_number" class="form-control"
+                           placeholder="House Number"
+                            autofocus/>
+                </div>
+                <div style="margin-bottom: 2%">
+                    <label style="color:black">
+                        <input name="status" type="radio" value=0>Paid
+                    </label>
+                    <label style="color:black">
+                        <input name="status" type="radio" value=1>Unpaid
+                    </label>
+                </div>--}}
                 <div style="margin-bottom: 2%">
                     <input type="text" name="date" class="form-control"
                            placeholder="Date"
@@ -24,41 +37,44 @@
             </form>
         </div>
 
-        <?php echo e(Form::close()); ?>
-
+        {{ Form::close() }}
 
         <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                width="100%">
             <thead>
             <tr>
-                <th>House Number</th>
                 <th>Status</th>
                 <th>Date</th>
+                <th>Amount</th>
+                <th>Tax</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <?php $__currentLoopData = $payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            @foreach($payments as $payment)
                 <tr>
-                    <td><?php echo e($payment->house->house_number); ?></td>
-                    <td> <?php if($payment->status==0): ?><h4><span class="label label-warning">Unpaid</span></h4>
-                        <?php else: ?>
-                            <h4><span class="label label-success">Paid</span></h4>
-                        <?php endif; ?></td>
-                    <td><?php echo e($payment->created_at); ?></td>
                     <td>
-                        <a class="btn btn-xs btn-primary" href="<?php echo e(route('admin.payment.show', [$payment->id])); ?>"
+                        {{$payment}}
+                    </td>
+                    {{--<td> @if($payment->status==0)<h4><span class="label label-warning">Unpaid</span></h4>
+                        @else
+                            <h4><span class="label label-success">Paid</span></h4>
+                        @endif</td>
+                    <td>{{ $payment->created_at}}</td>
+                    <td>{{ $payment->amount}}</td>
+                    <td>{{ $payment->amount}}</td>
+                    <td>
+                        <a class="btn btn-xs btn-primary" href="{{ route('admin.payment.show', [$payment->id]) }}"
                            data-toggle="tooltip" data-placement="top"
-                           data-title="<?php echo e(__('views.admin.users.index.show')); ?>">
+                           data-title="{{ __('views.admin.users.index.show') }}">
                             <i class="fa fa-eye"></i>
                         </a>
-                    </td>
+                    </td>--}}
                 </tr>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            @endforeach
             </tbody>
         </table>
-        <?php echo $payments->appends(\Request::except('page'))->render(); ?>
-
+        {!! $payments->appends(\Request::except('page'))->render() !!}
 
         <div class="pull-right">
         </div>
@@ -79,13 +95,12 @@
                         <div class="login_wrapper">
                             <div class="animate form">
                                 <section class="login_content">
-                                    <?php echo e(Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $payments[0]->apartment_id), 'files' => true))); ?>
-
+                                    {{ Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $payments[0]->apartment_id), 'files' => true)) }}
                                     <form><h1>New Payment</h1>
                                         <div>
                                             <input type="text" name="name" class="form-control"
                                                    placeholder="name"
-                                                   value="<?php echo e(old('name')); ?>" required autofocus/>
+                                                   value="{{ old('name') }}" required autofocus/>
                                         </div>
                                         <div>
                                             <input type="text" name="description" class="form-control"
@@ -107,8 +122,7 @@
                                         </div>
                                     </form>
 
-                                    <?php echo e(Form::close()); ?>
-
+                                    {{ Form::close() }}
                                 </section>
                             </div>
                         </div>
@@ -123,5 +137,4 @@
             </div>
         </div>
     </div>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin.layouts.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection

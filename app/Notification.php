@@ -22,7 +22,7 @@ class Notification extends Model
         $notifications = [];
         foreach ($apartments as $apartment) {
             $AC = new ApartmentController();
-            if ($AC::getUserApartments($apartment->id, auth()->user()->id) || $apartment->owner_id === auth()->user()->id) {
+            if ($AC::getUserApartments($apartment->id, auth()->user()->id) || $apartment->owner_id === auth()->user()->id|| $apartment->caretaker_id === auth()->user()->id) {
                 $notification = Notification::where('apartment_id', $apartment->id)->get();
 
                 foreach ($notification as $not) {

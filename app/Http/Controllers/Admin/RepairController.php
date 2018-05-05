@@ -15,7 +15,7 @@ class RepairController
      */
     public function index($apartment_id)
     {
-        $repairs = Repair::with('apartment')->where('apartment_id', '=', $apartment_id)->paginate(10);
+        $repairs = Repair::with('apartment')->where('apartment_id', '=', $apartment_id)->get();
         return view('admin.repairs.index', ['repairs' => $repairs]);
     }
 

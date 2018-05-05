@@ -66,6 +66,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::get('apartments/{apartment}/show', 'ApartmentController@show')->name('apartments.show');
     Route::get('apartments/{apartment}/edit', 'ApartmentController@edit')->name('apartment.edit');
     Route::put('apartments/{apartment}', 'ApartmentController@update')->name('apartments.update');
+    Route::post('apartments/{apartment}/add_caretaker', 'ApartmentController@addCaretaker')->name('apartments.addcaretaker');
     Route::delete('apartments/{id}', 'ApartmentController@destroy')->name('apartment.delete');
     Route::post('housestore/{apartment_id}', 'HouseController@create')->name('housestore');
     Route::get('houses/{house}/show', 'HouseController@show')->name('houses.show');
@@ -79,12 +80,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::post('repairs/{user_id}/{apartment_id}/create', 'RepairController@create')->name('repairstore');
     Route::get('repairs/{repair}/view', 'RepairController@show')->name('repair.show');
     Route::get('payments/{apartment_id}/show', 'PaymentController@index')->name('payments.show');
+    Route::get('payments/{payment}/view', 'PaymentController@show')->name('payment.show');
+    Route::get('payments/{id}/status', 'PaymentController@changeStatus')->name('payment.status');
+    Route::post('payments/{apartment_id}/search', 'PaymentController@searchPayment')->name('payments.search');
     Route::post('payments/{user_id}/{apartment_id}/create', 'PaymentController@create')->name('paymentstore');
     Route::post('notifications/{user_id}/{apartment_id}/create', 'NotificationController@create')->name('notificationstore');
     Route::get('notifications', 'NotificationController@index')->name('notifications');
     Route::post('house/{house_id}/rent', 'HouseController@rentUser')->name('house.rent');
     Route::get('chat/{apartment}/show', 'ChatController@show')->name('chats.show');
     Route::post('chat/{apartment_id}/new', 'ChatController@create')->name('chats.new');
+    Route::get('kra', 'PaymentController@kra')->name('kra');
 });
 
 

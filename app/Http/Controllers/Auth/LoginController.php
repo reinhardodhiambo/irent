@@ -41,7 +41,7 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
@@ -108,6 +108,9 @@ class LoginController extends Controller
                 ->withErrors($errors);
         }
 
-        return redirect()->intended($this->redirectPath());
+        if (auth()->user()->hasRole('administrator'))
+            return redirect()->intended($this->redirectPath());
+        else
+            return redirect('/admin/apartments');
     }
 }

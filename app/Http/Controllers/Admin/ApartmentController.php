@@ -61,7 +61,9 @@ class ApartmentController
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', ['apartment' => $apartment]);
+        $caretakers = User::where('owner_id', \auth()->user()->id)->get();
+        $caretaker = User::Where('id', $apartment->caretaker_id)->first();
+        return view('admin.apartments.show', ['apartment' => $apartment, 'caretakers' => $caretakers, 'caretaker' => $caretaker]);
     }
 
     /**
@@ -82,7 +84,7 @@ class ApartmentController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-    ID	Name 	Description 	Location	Actions
+     * ID    Name    Description    Location    Actions
      * 1    Siwaka    Hostel    Keri Road    ￼
      * 2    cxzc    xczxc    xczxczxczxc    ￼
      * 3    xc\    \x    \xc    ￼
@@ -126,6 +128,30 @@ class ApartmentController
             }
         }else
         return false;
+        /*$houses = House::with('UserHouse')->where('apartment_id', $apartment_id)->get();
+        //$apartments = Apartment::where('id',$apartment_id)->get();
+        if ($houses) {
+            $HC = new HouseController;
+            foreach ($houses as $house){
+                if(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('caretaker') || $HC::getUserHouses($house->id,$user_id))
+                    return true;
+            }
+        }
+        return false;*/
 
+
+    }
+
+    public function addCaretaker($apartment, Request $request)
+    {
+        $caretaker = $request->caretaker;
+        $user = User::where('id', $caretaker)->first();
+        $apartment = Apartment::where('id', $apartment)->first();
+        if ($user && $apartment) {
+            $apartment->caretaker_id = $user->id;
+            $apartment->save();
+            return back()->withInput();
+        } else
+            return back()->withErrors($this);
     }
 }

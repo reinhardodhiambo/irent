@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Notification
-    </button>
+   {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Notification
+    </button>--}}
 
     <div class="row">
         <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"

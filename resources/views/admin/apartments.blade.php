@@ -55,7 +55,7 @@
             <tbody>
             @foreach($apartments as $apartment)
                {{-- @if(array_search(['user_id'=>auth()->user()->id],$apartment->houses))--}}
-                @if($apartment->owner_id === auth()->user()->id || auth()->user()->hasRole('caretaker')||App\Http\Controllers\Admin\ApartmentController::getUserApartments($apartment->id, auth()->user()->id ))
+                @if($apartment->owner_id === auth()->user()->id || auth()->user()->id==$apartment->caretaker_id||App\Http\Controllers\Admin\ApartmentController::getUserApartments($apartment->id, auth()->user()->id ))
 
                 <tr>
                     <td>{{ $apartment->id }}</td>

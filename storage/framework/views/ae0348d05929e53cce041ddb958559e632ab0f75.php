@@ -55,7 +55,7 @@
             <tbody>
             <?php $__currentLoopData = $apartments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $apartment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                
-                <?php if($apartment->owner_id === auth()->user()->id || auth()->user()->hasRole('caretaker')||App\Http\Controllers\Admin\ApartmentController::getUserApartments($apartment->id, auth()->user()->id )): ?>
+                <?php if($apartment->owner_id === auth()->user()->id || auth()->user()->id==$apartment->caretaker_id||App\Http\Controllers\Admin\ApartmentController::getUserApartments($apartment->id, auth()->user()->id )): ?>
 
                 <tr>
                     <td><?php echo e($apartment->id); ?></td>

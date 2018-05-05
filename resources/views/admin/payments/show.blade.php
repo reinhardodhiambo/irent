@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', __('views.admin.users.show.title', ['name' => $repair->name]))
+@section('title', __('views.admin.users.show.title', ['name' => $payment->house->house_number]))
 
 @section('content')
     <div class="row">
@@ -8,17 +8,19 @@
             <tbody>
 
             <tr>
-                <th>Name</th>
-                <td>{{ $repair->name }}</td>
+                <th>House No</th>
+                <td>{{$payment->house->house_number }}</td>
             </tr>
 
             <tr>
-                <th>Description</th>
+                <th>Status</th>
                 <td>
-                    {{$repair->description}}
-                </td>
+                    @if($payment->status==0)<h4><span class="label label-warning">Unpaid</span></h4>
+                    @else
+                        <h4><span class="label label-success">Paid</span></h4>
+                    @endif</td>
             </tr>
-s
+
             <tr>
                 <th>Photos</th>
                 <td>
@@ -28,15 +30,27 @@ s
 
                 </td>
             </tr>
+            @if(auth()->user()->hasRole('caretaker'))
+            <tr>
+                <th>Change status</th>
+                <td>
+                    <a class="btn btn-xs btn-primary" href="{{ route('admin.payment.status', [$payment->id]) }}"
+                       data-toggle="tooltip" data-placement="top"
+                       data-title="Change Status">
+                        <i>Change status</i>
+                    </a>
+                </td>
+            </tr>
+            @endif
 
             <tr>
                 <th>Created At</th>
-                <td>{{ $repair->created_at }} ({{ $repair->created_at->diffForHumans() }})</td>
+                <td>{{ $payment->created_at }} ({{ $payment->created_at->diffForHumans() }})</td>
             </tr>
 
             <tr>
                 <th>Update At</th>
-                <td>{{ $repair->updated_at }} ({{ $repair->updated_at->diffForHumans() }})</td>
+                <td>{{ $payment->updated_at }} ({{ $payment->updated_at->diffForHumans() }})</td>
             </tr>
             </tbody>
         </table>

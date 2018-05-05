@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class House extends Model
 {
 
+    use Sortable;
     protected $table = 'houses';
     protected $fillable = ['house_number','apartment_id','bedroom','kitchen','bathroom','toilet','balcony','floor'];
+    public $sortable = ['house_number','apartment_id','bedroom','kitchen','bathroom','toilet','balcony','floor'];
 
     public function apartment()
     {

@@ -12,20 +12,27 @@
         <button type="button" class="btn btn-primary fa fa-envelope" data-toggle="modal"
                 data-target=".bs-example-modal-lk">
         </button>
+
         <a class="btn btn-primary" href="{{ route('admin.repairs.show', [$apartment->id]) }}">
             <i class="fa fa-briefcase" aria-hidden="true"></i>
         </a>
 
-            <button type="button" class="btn btn-primary fa fa-money" data-toggle="modal"
-                    data-target=".bs-example-modal-lp">
-            </button>
+        {{-- @if(auth()->user()->hasRole('authenticated'))
+             <button type="button" class="btn btn-primary fa fa-money" data-toggle="modal"
+                     data-target=".bs-example-modal-lp">
+             </button>
+         @endif
 
-       {{-- <a class="btn btn-primary" href="{{ route('admin.payments.show', [$apartment->id]) }}">
+         @if(!auth()->user()->hasRole('authenticated'))--}}
+        <a class="btn btn-primary" href="{{ route('admin.payments.show', [$apartment->id]) }}">
             <i class="fa fa-money" aria-hidden="true"></i>
-        </a>--}}
-        <a class="btn btn-primary" href="{{ route('admin.chats.show', [$apartment->id]) }}">
-            <i class="fa fa-comment-o" aria-hidden="true"></i>
         </a>
+        {{--@endif--}}
+        @if(auth()->user()->hasRole('authenticated'))
+            <a class="btn btn-primary" href="{{ route('admin.chats.show', [$apartment->id]) }}">
+                <i class="fa fa-comment-o" aria-hidden="true"></i>
+            </a>
+        @endif
     </div>
     <div class="row"></div>
     <div class="row">
@@ -49,6 +56,23 @@
                     {{ $apartment->location}}
                 </td>
             </tr>
+            @if(auth()->user()->hasRole('administrator'))
+                <tr>
+                    <th>Caretaker</th>
+                    <td>
+                        @if($apartment->caretaker_id==0)
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target=".bs-example-modal-cr">Add Caretaker
+                            </button>
+                        @else
+                            {{$caretaker->name}}
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target=".bs-example-modal-cr">Change Caretaker
+                            </button>
+                        @endif
+                    </td>
+                </tr>
+            @endif
 
             <tr>
                 <th>Created At</th>
@@ -78,7 +102,7 @@
             </thead>
             <tbody>
             @foreach($apartment->houses as $house)
-                @if(auth()->user()->hasRole('administrator') ||auth()->user()->hasRole('caretaker') || App\Http\Controllers\Admin\HouseController::getUserHouses($house->id,auth()->user()->id))
+                @if(auth()->user()->id===$apartment->owner_id ||auth()->user()->id === $apartment->caretaker_id || App\Http\Controllers\Admin\HouseController::getUserHouses($house->id,auth()->user()->id))
                     <tr>
                         <td>{{ $house->house_number }}</td>
                         <td>{{ $house->floor }}</td>
@@ -313,6 +337,55 @@
                                         <input id="amount" type="text" name="amount"></p>
                                         <button>Pay with PayPal</button>
                                     </form>
+                                </section>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade bs-example-modal-cr" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-cr">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Caretaker</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="login_wrapper">
+                            <div class="animate form">
+                                <section class="login_content">
+                                    {{  Form::open(['url' => 'admin/apartments/'.$apartment->id.'/add_caretaker','method'=>'post']) }}
+                                    <form><h1>Select Caretaker</h1>
+                                        <div>
+                                            <select id="caretaker" name="caretaker" class="form-control" required="">
+                                                <option value="">Select Caretaker</option>
+                                                @foreach($caretakers as $caretaker)
+                                                    <option value={{$caretaker->id}}>{{$caretaker->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <button type="submit"
+                                                    class="btn btn-default submit">Process
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    {{ Form::close() }}
                                 </section>
                             </div>
                         </div>

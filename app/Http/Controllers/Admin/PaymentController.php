@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Apartment;
 use App\Http\Controllers\Controller;
 use App\Payment;
+use App\PaymentPhoto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class PaymentController extends Controller
 {
@@ -15,7 +18,7 @@ class PaymentController extends Controller
      */
     public function index($apartment_id)
     {
-        $payments = Payment::with('apartment')->where('apartment_id','=',$apartment_id)->paginate(10);
+        $payments = Payment::with('apartment','house')->where('apartment_id',$apartment_id)->sortable()->paginate();
         return view('admin.payments.index', ['payments' => $payments]);
     }
 
@@ -38,7 +41,66 @@ class PaymentController extends Controller
 
         $payment->save();
 
+        if ($request->hasFile('photos')) {
+
+            $allowedfileExtension = ['pdf', 'jpg', 'png', 'docx'];
+
+            $files = $request->file('photos');
+
+            foreach ($files as $key => $file) {
+
+                $filename = $file->getClientOriginalName();
+
+                $extension = $file->getClientOriginalExtension();
+
+                $check = in_array($extension, $allowedfileExtension);
+
+                if ($check) {
+
+                    $photo = $request->photos;
+
+                    $filename = $photo[$key]->store('photos');
+
+                    $payment_photo = new PaymentPhoto([
+
+                        'payment_id' => $payment->id,
+
+                        'filename' => $filename
+
+                    ]);
+                    $payment_photo->save();
+
+
+                    echo "Upload Successfully";
+
+                } else {
+
+                    echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc</div>';
+
+                }
+
+            }
+        }
+
         return redirect('/admin/payments/'.$apartment_id.'/show');
+    }
+
+    public function searchPayment(Request $request, $apartment_id){
+
+        $house_number = Input::get('house_number');
+        $date = Input::get('date');
+        $status = Input::get('status');
+        if(isset($house_number)){
+            $payments = Payment::with('apartment','house')->where( 'house.house_number', 'LIKE', "%$request->house_number%")->where('apartment_id',$apartment_id)->sortable()->paginate();
+        }elseif(isset($date)){
+            $payments = Payment::with('apartment','house')->where('created_at', 'LIKE', "%$request->date%")->where('apartment_id',$apartment_id)->sortable()->paginate();
+        }elseif(isset($status)){
+
+
+        }else{
+            $payments = Payment::with('apartment','house')->where('apartment_id',$apartment_id)->sortable()->paginate();
+        }
+        return view('admin.payments.index', ['payments' => $payments]);
     }
 
     /**
@@ -55,12 +117,13 @@ class PaymentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Payment $payment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Payment $payment)
     {
-        //
+        $photos = PaymentPhoto::where('payment_id', $payment->id)->get();
+        return view('admin.payments.show', ['payment' => $payment, 'photos' => $photos]);
     }
 
     /**
@@ -86,6 +149,17 @@ class PaymentController extends Controller
         //
     }
 
+    public function changeStatus($id)
+    {
+        $payment = Payment::where('id',$id)->first();
+        if($payment->status==0)
+            $payment->status=1;
+        else
+            $payment->status=0;
+        $payment->save();
+        return back()->withInput();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -95,5 +169,22 @@ class PaymentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function kra(){
+        $payments_array = [];
+        $payments = null;
+        $apartments = Apartment::where('owner_id',auth()->user()->id)->get();
+        foreach ($apartments as $apartment){
+            $paym = Payment::where('apartment_id', $apartment)->get();
+            foreach ($paym as $pay){
+                $payments_array[] = $pay;
+            }
+        }
+        $payments = json_decode(json_encode($payments_array, FALSE));
+
+        return view('admin.kra.index', ['payments' => $payments]);
+
+
     }
 }
