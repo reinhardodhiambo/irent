@@ -42,10 +42,10 @@
 
     @if(auth()->user()->hasRole('administrator'))
     <div class="row">
-        @foreach($apartments as $apartment)
+        @foreach($apartments as $key=>$apartment)
 
             <div class="col-md-4 col-sm-4 col-xs-12">
-                <div id="registration_usage" class="x_panel tile fixed_height_320 overflow_hidden">
+                <div id="registration_usage" class="x_panel tile overflow_hidden">
                     <div class="x_title">
                         <h2>{{$apartment->name}}</h2>
                         <ul class="nav navbar-right panel_toolbox">
@@ -78,50 +78,9 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <canvas id="{{$apartment->id}}" class="canvasChart {{$apartment->id}}" height="140"
+                                    {{--<canvas id="{{$apartment->id}}" class="canvasChart {{$apartment->id}}" height="140"
                                             width="140" style="margin: 15px 10px 10px 0">
-                                    </canvas>
-                                    <script>
-                                        var registrationUsage = {
-                                            _defaults: {
-                                                type: 'doughnut',
-                                                tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-                                                data: {
-                                                    labels: [],
-                                                    datasets: [{
-                                                        data: [],
-                                                        backgroundColor: [
-                                                            "#3498DB",
-                                                            "#3498DB",
-                                                            "#9B59B6",
-                                                            "#E74C3C",
-                                                        ],
-                                                        hoverBackgroundColor: [
-                                                            "#36CAAB",
-                                                            "#49A9EA",
-                                                            "#B370CF",
-                                                            "#E95E4F",
-                                                        ]
-                                                    }]
-                                                },
-                                                options: {
-                                                    legend: false,
-                                                    responsive: false
-                                                }
-                                            },
-                                            init: function ($el) {
-                                                var self = this;
-                                                $el = $($el);
-
-                                                self._defaults.data.datasets[0].data = [1, 2, 3, 4];
-
-                                                new Chart($el.find('.canvasChart{{$apartment->id}}'), self._defaults);
-                                            }
-
-                                        }
-                                        };
-                                        registrationUsage.init($('#registration_usage'));
-                                    </script>
+                                    </canvas>--}}
 
                                 </td>
                                 <td>
@@ -160,6 +119,9 @@
                                 </td>
                             </tr>
                         </table>
+                        <div style="width:90%;">
+                            {!! $charts[$key]->render() !!}
+                        </div>
                     </div>
                 </div>
             </div>

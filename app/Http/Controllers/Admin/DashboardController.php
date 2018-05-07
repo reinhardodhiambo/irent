@@ -63,12 +63,51 @@ class DashboardController extends Controller
             }
         }
 
+        $chartjs = app()->chartjs
+            ->name('barChartTest')
+            ->type('bar')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels(['Label x', 'Label y'])
+            ->datasets([
+                [
+                    "label" => "My First dataset",
+                    'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+                    'data' => [69, 59]
+                ],
+                [
+                    "label" => "My First dataset",
+                    'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
+                    'data' => [65, 12]
+                ]
+            ])
+            ->options([]);
+
         $apartments = null;
+        $charts = null;
         if(auth()->user()->hasRole('administrator')){
             $apartments = Apartment::with('houses')->where('owner_id',auth()->user()->id)->get();
             $apartments_array = [];
+            $chartsa = [];
             foreach ($apartments as $apartment){
                 $details = self::get_apartment_details($apartment->id);
+                $chartsa [] = app()->chartjs
+                    ->name('chart'.$apartment->id)
+                    ->type('bar')
+                    ->size(['width' => 400, 'height' => 200])
+                    ->labels(['March', 'April'])
+                    ->datasets([
+                        [
+                            "label" => "House Uptake",
+                            'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+                            'data' => [rand(0,100), rand(0,100)]
+                        ],
+                        [
+                            "label" => "Vacation",
+                            'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
+                            'data' => [rand(0,100), rand(0,100)]
+                        ]
+                    ])
+                    ->options([]);
                 $apartments_array[] =[
                     'id'=>$apartment->id,
                     'name'=> $apartment->name,
@@ -78,10 +117,11 @@ class DashboardController extends Controller
                 ];
             }
             $apartments = json_decode(json_encode($apartments_array), FALSE);
+            $charts = $chartsa;
         }
 
 
-        return view('admin.dashboard', ['counts' => $counts,'apartments' => $apartments]);
+        return view('admin.dashboard', ['counts' => $counts,'apartments' => $apartments, 'chartjs'=>$chartjs, 'charts'=>$charts]);
     }
 
 

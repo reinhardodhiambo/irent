@@ -68,4 +68,11 @@
       'Html' => 'Collective\\Html\\HtmlFacade',
     ),
   ),
+  'fx3costa/laravelchartjs' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Fx3costa\\LaravelChartJs\\Providers\\ChartjsServiceProvider',
+    ),
+  ),
 );
