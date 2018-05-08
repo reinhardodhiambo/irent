@@ -98,12 +98,12 @@ class DashboardController extends Controller
                     ->datasets([
                         [
                             "label" => "House Uptake",
-                            'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+                            'backgroundColor' => ['rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)'],
                             'data' => [rand(0,100), rand(0,100)]
                         ],
                         [
                             "label" => "Vacation",
-                            'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
+                            'backgroundColor' => ['rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)'],
                             'data' => [rand(0,100), rand(0,100)]
                         ]
                     ])
