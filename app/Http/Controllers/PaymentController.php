@@ -135,7 +135,8 @@ class PaymentController extends Controller
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
 
             \Session::put('error', 'Payment failed');
-            return Redirect::to('/');
+            //return Redirect::to('/');
+            return back()->withInput();
 
         }
 
@@ -149,12 +150,14 @@ class PaymentController extends Controller
         if ($result->getState() == 'approved') {
 
             \Session::put('success', 'Payment success');
-            return Redirect::to('/');
+            //return Redirect::to('/');
+            return back()->withInput();
 
         }
 
         \Session::put('error', 'Payment failed');
-        return Redirect::to('/');
+        //return Redirect::to('/');
+        return back()->withInput();
 
     }
 
