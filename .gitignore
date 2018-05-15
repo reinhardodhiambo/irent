@@ -13,6 +13,7 @@ bootstrap/compiled.php
 #bootstrap/cache/
 
 storage/
+public/photos/
 storage/debugbar/
 storage/framework/views/
 storage/framework/sessions/

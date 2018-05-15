@@ -2,10 +2,12 @@
 
 <?php $__env->startSection('content'); ?>
 
+    <?php if(auth()->user()->hasRole('authenticated')): ?>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Payments
     </button>
+    <?php endif; ?>
 
-    <div class="row">
+    <div class="row" style=" margin-top: 91px;">
         <?php echo e(Form::open(array('route' => array('admin.payments.search',Request::route('apartment_id'))))); ?>
 
         <div style="background: #878688;padding:2%; margin-bottom: 2%">
@@ -79,7 +81,7 @@
                         <div class="login_wrapper">
                             <div class="animate form">
                                 <section class="login_content">
-                                    <?php echo e(Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $payments[0]->apartment_id), 'files' => true))); ?>
+                                    <?php echo e(Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $apartment_id), 'files' => true))); ?>
 
                                     <form><h1>New Payment</h1>
                                         <div>

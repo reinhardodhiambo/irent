@@ -4,10 +4,12 @@
 
 @section('content')
 
+    @if(auth()->user()->hasRole('authenticated'))
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Payments
     </button>
+    @endif
 
-    <div class="row">
+    <div class="row" style=" margin-top: 91px;">
         {{ Form::open(array('route' => array('admin.payments.search',Request::route('apartment_id')))) }}
         <div style="background: #878688;padding:2%; margin-bottom: 2%">
             <form><h5 style="color:black">Search</h5>
@@ -90,7 +92,7 @@
                         <div class="login_wrapper">
                             <div class="animate form">
                                 <section class="login_content">
-                                    {{ Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $payments[0]->apartment_id), 'files' => true)) }}
+                                    {{ Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $apartment_id), 'files' => true)) }}
                                     <form><h1>New Payment</h1>
                                         <div>
                                             <input type="text" name="name" class="form-control"
