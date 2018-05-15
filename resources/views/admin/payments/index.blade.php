@@ -5,8 +5,9 @@
 @section('content')
 
     @if(auth()->user()->hasRole('authenticated'))
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Payments
-    </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add
+            Payments
+        </button>
     @endif
 
     <div class="row" style=" margin-top: 91px;">
@@ -41,36 +42,41 @@
 
         {{ Form::close() }}
 
-        <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-               width="100%">
-            <thead>
-            <tr>
-                <th>House Number</th>
-                <th>Status</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($payments as $payment)
+
+        @if(count($payments)>0)
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                   width="100%">
+                <thead>
                 <tr>
-                    <td>{{ $payment->house->house_number}}</td>
-                    <td> @if($payment->status==0)<h4><span class="label label-warning">Unpaid</span></h4>
-                        @else
-                            <h4><span class="label label-success">Paid</span></h4>
-                        @endif</td>
-                    <td>{{ $payment->created_at}}</td>
-                    <td>
-                        <a class="btn btn-xs btn-primary" href="{{ route('admin.payment.show', [$payment->id]) }}"
-                           data-toggle="tooltip" data-placement="top"
-                           data-title="{{ __('views.admin.users.index.show') }}">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                    </td>
+                    <th>House Number</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach($payments as $payment)
+                    <tr>
+                        <td>{{ $payment->house->house_number}}</td>
+                        <td> @if($payment->status==0)<h4><span class="label label-warning">Unpaid</span></h4>
+                            @else
+                                <h4><span class="label label-success">Paid</span></h4>
+                            @endif</td>
+                        <td>{{ $payment->created_at}}</td>
+                        <td>
+                            <a class="btn btn-xs btn-primary" href="{{ route('admin.payment.show', [$payment->id]) }}"
+                               data-toggle="tooltip" data-placement="top"
+                               data-title="{{ __('views.admin.users.index.show') }}">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        @else
+            <h3>No Payments</h3>
+        @endif
         {!! $payments->appends(\Request::except('page'))->render() !!}
 
         <div class="pull-right">

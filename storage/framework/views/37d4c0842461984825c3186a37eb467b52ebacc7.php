@@ -3,8 +3,9 @@
 <?php $__env->startSection('content'); ?>
 
     <?php if(auth()->user()->hasRole('authenticated')): ?>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add Payments
-    </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add
+            Payments
+        </button>
     <?php endif; ?>
 
     <div class="row" style=" margin-top: 91px;">
@@ -29,36 +30,41 @@
         <?php echo e(Form::close()); ?>
 
 
-        <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
-               width="100%">
-            <thead>
-            <tr>
-                <th>House Number</th>
-                <th>Status</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php $__currentLoopData = $payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+        <?php if(count($payments)>0): ?>
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                   width="100%">
+                <thead>
                 <tr>
-                    <td><?php echo e($payment->house->house_number); ?></td>
-                    <td> <?php if($payment->status==0): ?><h4><span class="label label-warning">Unpaid</span></h4>
-                        <?php else: ?>
-                            <h4><span class="label label-success">Paid</span></h4>
-                        <?php endif; ?></td>
-                    <td><?php echo e($payment->created_at); ?></td>
-                    <td>
-                        <a class="btn btn-xs btn-primary" href="<?php echo e(route('admin.payment.show', [$payment->id])); ?>"
-                           data-toggle="tooltip" data-placement="top"
-                           data-title="<?php echo e(__('views.admin.users.index.show')); ?>">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                    </td>
+                    <th>House Number</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
                 </tr>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <?php $__currentLoopData = $payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
+                        <td><?php echo e($payment->house->house_number); ?></td>
+                        <td> <?php if($payment->status==0): ?><h4><span class="label label-warning">Unpaid</span></h4>
+                            <?php else: ?>
+                                <h4><span class="label label-success">Paid</span></h4>
+                            <?php endif; ?></td>
+                        <td><?php echo e($payment->created_at); ?></td>
+                        <td>
+                            <a class="btn btn-xs btn-primary" href="<?php echo e(route('admin.payment.show', [$payment->id])); ?>"
+                               data-toggle="tooltip" data-placement="top"
+                               data-title="<?php echo e(__('views.admin.users.index.show')); ?>">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <h3>No Payments</h3>
+        <?php endif; ?>
         <?php echo $payments->appends(\Request::except('page'))->render(); ?>
 
 
