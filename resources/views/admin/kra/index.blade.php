@@ -5,10 +5,10 @@
 @section('content')
 
     <div class="row">
-        {{ Form::open(array('route' => array('admin.payments.search',Request::route('apartment_id')))) }}
+        {{--{{ Form::open(array('route' => array('admin.payments.search',Request::route('apartment_id')))) }}
         <div style="background: #878688;padding:2%; margin-bottom: 2%">
             <form><h5 style="color:black">Search</h5>
-                {{--<div>
+                --}}{{--<div>
                     <input type="text" name="house_number" class="form-control"
                            placeholder="House Number"
                             autofocus/>
@@ -20,7 +20,7 @@
                     <label style="color:black">
                         <input name="status" type="radio" value=1>Unpaid
                     </label>
-                </div>--}}
+                </div>--}}{{--
                 <div style="margin-bottom: 2%">
                     <input type="text" name="date" class="form-control"
                            placeholder="Date"
@@ -34,7 +34,7 @@
             </form>
         </div>
 
-        {{ Form::close() }}
+        {{ Form::close() }}--}}
 
         <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                width="100%">
