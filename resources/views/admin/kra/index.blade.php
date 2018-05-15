@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'KRA')
+@section('title', 'KRA PORTAL')
 
 @section('content')
 
