@@ -77,6 +77,7 @@
         @else
             <h3>No Payments</h3>
         @endif
+        {!! $payments->appends(\Request::except('page'))->render() !!}
 
         <div class="pull-right">
         </div>
