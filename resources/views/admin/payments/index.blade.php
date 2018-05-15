@@ -92,7 +92,7 @@
                         <div class="login_wrapper">
                             <div class="animate form">
                                 <section class="login_content">
-                                    {{ Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $apartment_id), 'files' => true)) }}
+                                    {{ Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, Request::route('apartment_id')), 'files' => true)) }}
                                     <form><h1>New Payment</h1>
                                         <div>
                                             <input type="text" name="name" class="form-control"
