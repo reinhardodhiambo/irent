@@ -63,25 +63,6 @@ class DashboardController extends Controller
             }
         }
 
-        $chartjs = app()->chartjs
-            ->name('barChartTest')
-            ->type('bar')
-            ->size(['width' => 400, 'height' => 200])
-            ->labels(['Label x', 'Label y'])
-            ->datasets([
-                [
-                    "label" => "My First dataset",
-                    'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-                    'data' => [69, 59]
-                ],
-                [
-                    "label" => "My First dataset",
-                    'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
-                    'data' => [65, 12]
-                ]
-            ])
-            ->options([]);
-
         $apartments = null;
         $charts = null;
         if(auth()->user()->hasRole('administrator')){
@@ -90,21 +71,23 @@ class DashboardController extends Controller
             $chartsa = [];
             foreach ($apartments as $apartment){
                 $details = self::get_apartment_details($apartment->id);
+                $rate = self::get_rates($apartment->id);
                 $chartsa [] = app()->chartjs
                     ->name('chart'.$apartment->id)
                     ->type('bar')
                     ->size(['width' => 400, 'height' => 200])
-                    ->labels(['March', 'April'])
+                    ->labels(['January', 'February','March', 'April','May','June',
+                        'July','August','September','October','November','December'])
                     ->datasets([
                         [
                             "label" => "House Uptake",
-                            'backgroundColor' => ['rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)'],
-                            'data' => [rand(0,100), rand(0,100)]
+                            'backgroundColor' => ['rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)'],
+                            'data' =>$rate[0]
                         ],
                         [
                             "label" => "Vacation",
-                            'backgroundColor' => ['rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)'],
-                            'data' => [rand(0,100), rand(0,100)]
+                            'backgroundColor' => ['rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)'],
+                            'data' => $rate[1]
                         ]
                     ])
                     ->options([]);
@@ -121,7 +104,7 @@ class DashboardController extends Controller
         }
 
 
-        return view('admin.dashboard', ['counts' => $counts,'apartments' => $apartments, 'chartjs'=>$chartjs, 'charts'=>$charts]);
+        return view('admin.dashboard', ['counts' => $counts,'apartments' => $apartments, 'charts'=>$charts]);
     }
 
 
@@ -184,5 +167,45 @@ class DashboardController extends Controller
         ];
 
        return response($data);
+    }
+
+
+    /**
+     * @param $apartemnt_id
+     */
+    public function get_rates($apartemnt_id){
+        $houses = House::where('apartment_id', $apartemnt_id)->get();
+        $month=['January', 'February','March', 'April','May','June',
+                        'July','August','September','October','November','December'];
+        $uptake = [];
+        $vacation = [];
+        $houzes = [];
+        for ($months=0; $months<12; $months++) {
+            $new_tenants = 0;
+            $vacating_tenants = 0;
+            foreach ($houses as $house) {
+                $userHouses = UserHouse::where('house_id', $house->id)->get();
+                foreach ($userHouses as $userHouse) {
+                    if($userHouse->updated_at->month==$months){
+                        $new_tenants++;
+                        if(array_search($house->id,$houzes)){
+                            $vacating_tenants++;
+                        }
+                    }
+                    $houzes [] = $house-> id;
+                }
+            }
+            $uptake_rate = 0;
+            $vacation_rate = 0;
+            if(count($houses)>0) {
+                $uptake_rate = (($new_tenants / count($houses)) * 100);
+                $vacation_rate = (($vacating_tenants / count($houses)) * 100);
+            }
+
+            $uptake[] = $uptake_rate;
+            $vacation[] = $vacation_rate;
+        }
+
+        return [0=>$uptake,1=>$vacation];
     }
 }

@@ -88,7 +88,7 @@
 
             <tr>
                 <th>Update At</th>
-                <td><?php echo e($house->updated_at); ?> (<?php echo e($house->updated_at->diffForHumans()); ?>)</td>
+                <td><?php echo e($house->updated_at); ?> <?php echo e($house->updated_at->month); ?>(<?php echo e($house->updated_at->diffForHumans()); ?>)</td>
             </tr>
             </tbody>
         </table>
