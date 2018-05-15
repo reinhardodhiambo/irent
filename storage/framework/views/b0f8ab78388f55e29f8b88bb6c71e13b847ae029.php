@@ -11,7 +11,7 @@
                 <span class="count_top"><i
                             class="fa fa-address-card"></i> <?php echo e(__('views.admin.dashboard.count_1')); ?></span>
                 <div>
-                    <span class="count green"><?php echo e(($counts['users'] - $counts['users_unconfirmed'])*-1); ?></span>
+                    <span class="count green"><?php echo e(($counts['users'] - $counts['users_unconfirmed'])); ?></span>
                     <span class="count">/</span>
                     <span class="count red"><?php echo e($counts['users_unconfirmed']); ?></span>
                 </div>
@@ -26,9 +26,9 @@
                 </div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-lock"></i> <?php echo e(__('views.admin.dashboard.count_3')); ?></span>
+                <span class="count_top"><i class="fa fa-lock"></i> Apartments</span>
                 <div>
-                    <span class="count green"><?php echo e($counts['protected_pages']); ?></span>
+                    <span class="count green"><?php echo e($counts['apartments']); ?></span>
                 </div>
             </div>
         </div>

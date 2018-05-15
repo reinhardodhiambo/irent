@@ -51,15 +51,15 @@ class DashboardController extends Controller
     public function index()
     {
         $counts = [
-            'users' => \DB::table('users')->join('users_roles', 'users.id', '=', 'users_roles.user_id')->where('users_roles.user_id',3)->count(),
-            'users_unconfirmed' => \DB::table('users')->join('users_roles', 'users.id', '=', 'users_roles.user_id')->where('confirmed', false)->count(),
-            'users_inactive' => \DB::table('users')->join('users_roles', 'users.id', '=', 'users_roles.user_id')->where('active', false)->count(),
-            'protected_pages' => 0,
+            'users' => \DB::table('users')->where('owner_id',auth()->user()->id)->get()->count(),
+            'users_unconfirmed' => \DB::table('users')->join('users_roles', 'users.id', '=', 'users_roles.user_id')->where('owner_id',auth()->user()->id)->where('confirmed', false)->count(),
+            'users_inactive' => \DB::table('users')->join('users_roles', 'users.id', '=', 'users_roles.user_id')->where('owner_id',auth()->user()->id)->where('active', false)->count(),
+            'apartments' => \DB::table('apartments')->where('owner_id','=',auth()->user()->id)->get()->count()
         ];
 
         foreach (\Route::getRoutes() as $route) {
             foreach ($route->middleware() as $middleware) {
-                if (preg_match("/protection/", $middleware, $matches)) $counts['protected_pages']++;
+                //if (preg_match("/protection/", $middleware, $matches)) $counts['protected_pages']++;
             }
         }
 
