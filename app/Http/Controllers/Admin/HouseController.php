@@ -42,7 +42,7 @@ class HouseController extends Controller
         $house->floor = $request->floor;
         $house->toilet = $request->toilet;
         $house->balcony = $request->balcony;
-        $house->price = $request->price;
+        $house->price = str_replace(',','',$request->price);
         $house->save();
 
         return back()->withInput();
