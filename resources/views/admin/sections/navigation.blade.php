@@ -31,23 +31,25 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             @if(!auth()->user()->hasRole('caretaker'))
-            <div class="menu_section">
-                <h3>{{ __('views.backend.section.navigation.sub_header_0') }}</h3>
-                <ul class="nav side-menu">
-                    <li>
-                        <a href="{{ route('admin.dashboard') }}">
-                            <i class="fa fa-home" aria-hidden="true"></i>
-                            {{ __('views.backend.section.navigation.menu_0_1') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.kra') }}">
-                            <i class="fa fa-percent" aria-hidden="true"></i>
-                            KRA
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <div class="menu_section">
+                    <h3>{{ __('views.backend.section.navigation.sub_header_0') }}</h3>
+                    <ul class="nav side-menu">
+                        <li>
+                            <a href="{{ route('admin.dashboard') }}">
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                                {{ __('views.backend.section.navigation.menu_0_1') }}
+                            </a>
+                        </li>
+                        @if(auth()->user()->hasRole('administrator'))
+                            <li>
+                                <a href="{{ route('admin.kra') }}">
+                                    <i class="fa fa-percent" aria-hidden="true"></i>
+                                    KRA
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
             @endif
             <div class="menu_section">
                 <h3>{{ __('views.backend.section.navigation.sub_header_1') }}</h3>
@@ -60,12 +62,12 @@
                             </a>
                         </li>
                     @endif
-                        <li>
-                            <a href="{{ route('admin.apartments') }}">
-                                <i class="fa fa-key" aria-hidden="true"></i>
-                                {{ __('views.backend.section.navigation.menu_1_2') }}
-                            </a>
-                        </li>
+                    <li>
+                        <a href="{{ route('admin.apartments') }}">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                            {{ __('views.backend.section.navigation.menu_1_2') }}
+                        </a>
+                    </li>
                 </ul>
             </div>
 
