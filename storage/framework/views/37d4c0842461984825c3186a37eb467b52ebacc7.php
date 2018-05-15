@@ -65,8 +65,6 @@
         <?php else: ?>
             <h3>No Payments</h3>
         <?php endif; ?>
-        <?php echo $payments->appends(\Request::except('page'))->render(); ?>
-
 
         <div class="pull-right">
         </div>

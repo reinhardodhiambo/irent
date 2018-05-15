@@ -18,7 +18,7 @@ class PaymentController extends Controller
      */
     public function index($apartment_id)
     {
-        $payments = Payment::with('apartment', 'house')->where('apartment_id', $apartment_id)->sortable()->paginate();
+        $payments = Payment::with('apartment', 'house')->where('apartment_id', $apartment_id)->get();
         return view('admin.payments.index', ['payments' => $payments,'apartment_id'=>$apartment_id]);
     }
 
