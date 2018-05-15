@@ -68,7 +68,8 @@ class HouseController extends Controller
      */
     public function show(House $house)
     {
-        return view('admin.houses.show', ['house' => $house]);
+        $kitchen = ['','American Kitchen','British Kitchen'];
+        return view('admin.houses.show', ['house' => $house,'kitchen'=>$kitchen]);
     }
 
     /**

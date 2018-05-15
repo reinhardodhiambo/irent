@@ -27,7 +27,7 @@
             <tr>
                 <th>Kitchen</th>
                 <td>
-                    {{ $house->kitchen}}
+                    {{ $kitchen[$house->kitchen]}}
                 </td>
             </tr>
             <tr>

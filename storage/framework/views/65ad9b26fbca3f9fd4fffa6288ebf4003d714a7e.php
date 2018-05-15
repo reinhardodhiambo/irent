@@ -27,7 +27,7 @@
             <tr>
                 <th>Kitchen</th>
                 <td>
-                    <?php echo e($house->kitchen); ?>
+                    <?php echo e($kitchen[$house->kitchen]); ?>
 
                 </td>
             </tr>
