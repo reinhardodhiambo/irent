@@ -161,7 +161,7 @@
                         <div class="login_wrapper">
                             <div class="animate form">
                                 <section class="login_content">
-                                    <?php echo e(Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $house->apartment_id), 'files' => true))); ?>
+                                    <?php echo e(Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, $house->apartment_id, $house->id), 'files' => true))); ?>
 
                                     <form><h1>New Payment</h1>
                                         <div>

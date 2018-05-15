@@ -2,11 +2,7 @@
 
 <?php $__env->startSection('content'); ?>
 
-    <?php if(auth()->user()->hasRole('authenticated')): ?>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add
-            Payments
-        </button>
-    <?php endif; ?>
+    
 
     <div class="row" style=" margin-top: 91px;">
         <?php echo e(Form::open(array('route' => array('admin.payments.search',Request::route('apartment_id'))))); ?>
@@ -65,6 +61,8 @@
         <?php else: ?>
             <h3>No Payments</h3>
         <?php endif; ?>
+        <?php echo $payments->appends(\Request::except('page'))->render(); ?>
+
 
         <div class="pull-right">
         </div>
@@ -85,8 +83,7 @@
                         <div class="login_wrapper">
                             <div class="animate form">
                                 <section class="login_content">
-                                    <?php echo e(Form::open(array('route' => array('admin.paymentstore',auth()->user()->id, Request::route('apartment_id')), 'files' => true))); ?>
-
+                                    
                                     <form><h1>New Payment</h1>
                                         <div>
                                             <input type="text" name="name" class="form-control"
@@ -113,8 +110,7 @@
                                         </div>
                                     </form>
 
-                                    <?php echo e(Form::close()); ?>
-
+                                    
                                 </section>
                             </div>
                         </div>

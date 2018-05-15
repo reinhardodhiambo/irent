@@ -27,14 +27,14 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $user_id, $apartment_id)
+    public function create(Request $request, $user_id, $apartment_id, $house_id)
     {
         $payment = new Payment([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
             'amount' => $request->get('amount'),
             'user_id' => $user_id,
-            'house_id' => 5,
+            'house_id' => $house_id,
             'method' => 0,
             'apartment_id' => $apartment_id
         ]);
