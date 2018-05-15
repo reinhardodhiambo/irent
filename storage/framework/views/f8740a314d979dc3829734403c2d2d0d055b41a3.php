@@ -71,6 +71,12 @@
 
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo e(route('admin.receipts')); ?>">
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                            Receipts
+                        </a>
+                    </li>
                 </ul>
             </div>
 

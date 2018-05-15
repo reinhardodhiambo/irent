@@ -54,14 +54,16 @@
                 <td>
                     {{ $house->price}}
                     @if(auth()->user()->hasRole('authenticated'))
+                        {{--{{ Form::open(array('route' => array('admin.paypal',$house->id, $house->apartment_id))) }}--}}
                         <form class="w3-container w3-display-middle w3-card-4 w3-padding-16" method="POST"
-                              id="payment-form"
-                              action="{!! URL::to('paypal') !!}">
-                            {{ csrf_field() }}
-                            <input class="w3-input w3-border" id="amount" type="hidden" name="amount"
-                                   value={{$house->price}}></p>
-                            <button class="w3-btn w3-blue">Pay with PayPal</button>
+                        id="payment-form"
+                        action="{!! URL::to('paypal/'.$house->id.'/'.$house->apartment_id) !!}">
+                        {{ csrf_field() }}
+                        <input class="w3-input w3-border" id="amount" type="hidden" name="amount"
+                               value={{$house->price}}></p>
+                        <button class="w3-btn w3-blue">Pay with PayPal</button>
                         </form>
+                        {{--{{Form::close()}}--}}
                         <button data-toggle="modal" data-target=".bs-example-modal-pm">Other</button>
                     @endif
 

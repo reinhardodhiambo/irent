@@ -59,15 +59,17 @@
                     <?php echo e($house->price); ?>
 
                     <?php if(auth()->user()->hasRole('authenticated')): ?>
+                        
                         <form class="w3-container w3-display-middle w3-card-4 w3-padding-16" method="POST"
-                              id="payment-form"
-                              action="<?php echo URL::to('paypal'); ?>">
-                            <?php echo e(csrf_field()); ?>
+                        id="payment-form"
+                        action="<?php echo URL::to('paypal/'.$house->id.'/'.$house->apartment_id); ?>">
+                        <?php echo e(csrf_field()); ?>
 
-                            <input class="w3-input w3-border" id="amount" type="hidden" name="amount"
-                                   value=<?php echo e($house->price); ?>></p>
-                            <button class="w3-btn w3-blue">Pay with PayPal</button>
+                        <input class="w3-input w3-border" id="amount" type="hidden" name="amount"
+                               value=<?php echo e($house->price); ?>></p>
+                        <button class="w3-btn w3-blue">Pay with PayPal</button>
                         </form>
+                        
                         <button data-toggle="modal" data-target=".bs-example-modal-pm">Other</button>
                     <?php endif; ?>
 

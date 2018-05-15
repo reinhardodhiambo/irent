@@ -68,6 +68,12 @@
                             {{ __('views.backend.section.navigation.menu_1_2') }}
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.receipts') }}">
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                            Receipts
+                        </a>
+                    </li>
                 </ul>
             </div>
 

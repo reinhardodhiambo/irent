@@ -201,6 +201,7 @@ return [
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         \App\Providers\ProtectionProvider::class,
         Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -260,7 +261,8 @@ return [
         'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'ToJs' => \App\Helpers\ToJs\Facades\ToJsFacade::class,
-        'Meta' => \App\Helpers\Meta\Facades\MetaFacade::class
+        'Meta' => \App\Helpers\Meta\Facades\MetaFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

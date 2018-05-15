@@ -16,6 +16,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use PHPUnit\Util\PHP\AbstractPhpProcessTest;
 use Redirect;
 use Session;
 use URL;
@@ -44,7 +45,7 @@ class PaymentController extends Controller
     {
         return view('paywithpaypal');
     }
-    public function payWithpaypal(Request $request)
+    public function payWithpaypal(Request $request, $house_id, $apartment_id)
     {
 
         $payer = new Payer();
@@ -79,11 +80,26 @@ class PaymentController extends Controller
             ->setRedirectUrls($redirect_urls)
             ->setTransactions(array($transaction));
         /** dd($payment->create($this->_api_context));exit; **/
+        $paymentz = null;
         try {
 
             $payment->create($this->_api_context);
+            $paymentz = new \App\Payment([
+                'name' => 'rent',
+                'description' => 'Paid with paypal',
+                'amount' => $request->get('amount'),
+                'user_id' => auth()->user()->id,
+                'house_id' => $house_id,
+                'method' => 1,
+                'status' => 1,
+                'apartment_id' => $apartment_id
+            ]);
+
+            $paymentz->save();
 
         } catch (\PayPal\Exception\PPConnectionException $ex) {
+
+            $paymentz->delete();
 
             if (\Config::get('app.debug')) {
 

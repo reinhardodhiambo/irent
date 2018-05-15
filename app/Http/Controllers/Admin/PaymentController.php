@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Payment;
 use App\PaymentPhoto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 
 class PaymentController extends Controller
@@ -194,4 +195,23 @@ class PaymentController extends Controller
 
 
     }
+
+    public function get_receipts(){
+        $payments = Payment::with('apartment', 'house')->where('user_id', auth()->user()->id)->where('status',1)->sortable()->paginate();
+        return view('admin.receipts.index', ['payments' => $payments]);
+    }
+
+    public function download_receipt($id){
+        $payment= Payment::where('id',$id)->first();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML('<h2>iRent Receipt</h2>
+                 <h3>No. '.$payment->id.'</h3>
+                 <table><tbody>
+                 <tr><th>Date</th><td>'.$payment->created_at.'</td></tr>
+                 <tr><th>Item</th><td>'.$payment->description.'</td></tr>
+                 <tr><th>Amount</th><td>'.$payment->amount.'</td></tr>
+</tbody></table>');
+        return $pdf->setPaper('a7', 'landscape')->setWarnings(false)->download('irent_receipt.pdf');
+    }
+
 }

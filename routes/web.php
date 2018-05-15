@@ -92,6 +92,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin','mid
     Route::get('chat/{apartment}/show', 'ChatController@show')->name('chats.show');
     Route::post('chat/{apartment_id}/new', 'ChatController@create')->name('chats.new');
     Route::get('kra', 'PaymentController@kra')->name('kra');
+    Route::get('receipts', 'PaymentController@get_receipts')->name('receipts');
+    Route::get('receipts/{id}/download', 'PaymentController@download_receipt')->name('receipts.download');
 });
 
 
@@ -122,7 +124,9 @@ Route::get("user/{id}/delete", [
 ]);
 
 // route for processing payment
-Route::post('paypal', 'PaymentController@payWithpaypal');
+Route::post('paypal/{house_id}/{apartment_id}', [
+    "as"=>"admin.paypal",
+    "uses"=>'PaymentController@payWithpaypal']);
 
 // route for check status of the payment
 Route::get('status', 'PaymentController@getPaymentStatus');
