@@ -83,6 +83,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin','mid
     Route::get('payments/{payment}/view', 'PaymentController@show')->name('payment.show');
     Route::get('payments/{id}/status', 'PaymentController@changeStatus')->name('payment.status');
     Route::post('payments/{apartment_id}/search', 'PaymentController@searchPayment')->name('payments.search');
+    Route::get('payments/{apartment_id}/search', 'PaymentController@index')->name('payments.search');
     Route::post('payments/{user_id}/{apartment_id}/create', 'PaymentController@create')->name('paymentstore');
     Route::post('notifications/{user_id}/{apartment_id}/create', 'NotificationController@create')->name('notificationstore');
     Route::get('notifications', 'NotificationController@index')->name('notifications');
