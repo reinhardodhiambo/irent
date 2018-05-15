@@ -28,6 +28,7 @@ class Notification extends Model
                 foreach ($notification as $not) {
                     $user = User::where('id', $not->user_id)->first();
                     $notifications [] = [
+                        'id'=> $not -> id,
                         'user_id' => $not->user_id,
                         'user_name' => $user->name,
                         'to_user_id' => $not->to_user_id,

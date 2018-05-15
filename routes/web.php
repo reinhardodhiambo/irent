@@ -86,6 +86,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin','mid
     Route::post('payments/{user_id}/{apartment_id}/create', 'PaymentController@create')->name('paymentstore');
     Route::post('notifications/{user_id}/{apartment_id}/create', 'NotificationController@create')->name('notificationstore');
     Route::get('notifications', 'NotificationController@index')->name('notifications');
+    Route::get('notifications/{id}', 'NotificationController@destroy')->name('notification.delete');
     Route::post('house/{house_id}/rent', 'HouseController@rentUser')->name('house.rent');
     Route::get('chat/{apartment}/show', 'ChatController@show')->name('chats.show');
     Route::post('chat/{apartment_id}/new', 'ChatController@create')->name('chats.new');

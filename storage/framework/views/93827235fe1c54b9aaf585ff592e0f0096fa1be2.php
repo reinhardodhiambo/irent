@@ -15,14 +15,6 @@
                     <div class="title_left">
                         <h1 class="h3"><?php echo $__env->yieldContent('title'); ?></h1>
                     </div>
-                    <?php if(Breadcrumbs::exists()): ?>
-                        <div class="title_right">
-                            <div class="pull-right">
-                                <?php echo Breadcrumbs::render(); ?>
-
-                            </div>
-                        </div>
-                    <?php endif; ?>
                 </div>
                 <?php echo $__env->yieldContent('content'); ?>
             </div>

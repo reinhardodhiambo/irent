@@ -27,20 +27,9 @@
                         <td><span class="label label-warning">Unread</span></td>
                     @endif
                     <td>
-
-                        <a class="btn btn-xs btn-primary" href="{{--{{ route('admin.repair.show', [$repair->id]) }}--}}"
-                           data-toggle="tooltip" data-placement="top"
-                           data-title="{{ __('views.admin.users.index.show') }}">
-                            <i class="fa fa-eye"></i>
-                        </a>
                         @if(auth()->user()->hasRole('administrator'))
-                            <a class="btn btn-xs btn-info" href="{{--{{ route('admin.house.edit', [$repair->id]) }}--}}"
-                               data-toggle="tooltip" data-placement="top"
-                               data-title="{{ __('views.admin.users.index.edit') }}">
-                                <i class="fa fa-pencil"></i>
-                            </a>
                             <a class="btn btn-xs btn-danger"
-                               href="{{--{{ route('admin.houses.delete', [$repair->id]) }}--}}"
+                               href="{{ route('admin.notification.delete', [$notification->id]) }}"
                                data-toggle="tooltip" data-placement="top"
                                data-title="delete">
                                 <i class="fa fa-trash"></i>

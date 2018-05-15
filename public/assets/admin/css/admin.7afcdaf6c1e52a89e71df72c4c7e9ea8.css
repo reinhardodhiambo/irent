@@ -12530,7 +12530,8 @@ h2,
 h3,
 .h3 {
     margin-top: 10px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    float:left;
 }
 
 a {
