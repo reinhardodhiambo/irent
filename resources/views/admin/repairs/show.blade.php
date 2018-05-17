@@ -18,14 +18,31 @@
                     {{$repair->description}}
                 </td>
             </tr>
-s
+            s
             <tr>
                 <th>Photos</th>
                 <td>
                     @foreach($photos as $photo)
-                       <img style="max-height: 400px; max-width: 400px;" src={{asset("$photo->filename")}}>
+                        <img style="max-height: 400px; max-width: 400px;" src={{asset("$photo->filename")}}>
                     @endforeach
 
+                </td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>
+                    @if($repair->status==0)<h4><span class="label label-warning">Not Repaired</span></h4>
+                    @else
+                        <h4><span class="label label-success">Repaired</span></h4>
+                    @endif
+
+                    @if(auth()->user()->hasRole('caretaker'))
+                            <a class="btn btn-xs btn-primary" href="{{ route('admin.repair.status', [$repair->id]) }}"
+                               data-toggle="tooltip" data-placement="top"
+                               data-title="Change Status">
+                                <i>Change status</i>
+                            </a>
+                    @endif
                 </td>
             </tr>
 

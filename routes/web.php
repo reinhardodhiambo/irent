@@ -73,12 +73,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin','mid
     Route::get('house/{id}', 'HouseController@destroy')->name('houses.delete');
     Route::put('house/{apartment}', 'HouseController@update')->name('houses.update');
     Route::get('houses/{house}/edit', 'HouseController@edit')->name('house.edit');
+    Route::get('house/{house_id}/terminate', 'HouseController@terminate')->name('house.terminate');
     Route::get('permissions/{user}/repeat', 'PermissionController@repeat')->name('permissions.repeat');
     Route::get('dashboard/log-chart', 'DashboardController@getLogChartData')->name('dashboard.log.chart');
     Route::get('dashboard/registration-chart', 'DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');
     Route::get('repairs/{apartment_id}/show', 'RepairController@index')->name('repairs.show');
     Route::post('repairs/{user_id}/{apartment_id}/create', 'RepairController@create')->name('repairstore');
     Route::get('repairs/{repair}/view', 'RepairController@show')->name('repair.show');
+    Route::get('repairs/{id}/status', 'RepairController@changestatus')->name('repair.status');
     Route::get('payments/{apartment_id}/show', 'PaymentController@index')->name('payments.show');
     Route::get('payments/{payment}/view', 'PaymentController@show')->name('payment.show');
     Route::get('payments/{id}/status', 'PaymentController@changeStatus')->name('payment.status');

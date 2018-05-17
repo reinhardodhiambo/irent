@@ -56,12 +56,12 @@
                     @if(auth()->user()->hasRole('authenticated'))
                         {{--{{ Form::open(array('route' => array('admin.paypal',$house->id, $house->apartment_id))) }}--}}
                         <form class="w3-container w3-display-middle w3-card-4 w3-padding-16" method="POST"
-                        id="payment-form"
-                        action="{!! URL::to('paypal/'.$house->id.'/'.$house->apartment_id) !!}">
-                        {{ csrf_field() }}
-                        <input class="w3-input w3-border" id="amount" type="hidden" name="amount"
-                               value={{$house->price}}></p>
-                        <button class="w3-btn w3-blue">Pay with PayPal</button>
+                              id="payment-form"
+                              action="{!! URL::to('paypal/'.$house->id.'/'.$house->apartment_id) !!}">
+                            {{ csrf_field() }}
+                            <input class="w3-input w3-border" id="amount" type="hidden" name="amount"
+                                   value={{$house->price}}></p>
+                            <button class="w3-btn w3-blue">Pay with PayPal</button>
                         </form>
                         {{--{{Form::close()}}--}}
                         <button data-toggle="modal" data-target=".bs-example-modal-pm">Other</button>
@@ -71,7 +71,7 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td> @if(!isset($house->UserHouse->user_id))<span class="label label-warning">Vacant</span>
+                <td> @if(App\UserHouse::is_vacant($house->id))<span class="label label-warning">Vacant</span>
                     @else
                         <span class="label label-success">Not Vacant</span>
                     @endif</td>
@@ -90,8 +90,16 @@
         </table>
     </div>
     @if(auth()->user()->hasRole('administrator') || auth()->user()->hasRole('administrator'))
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lk">Add Tenant
-        </button>
+        @if(!App\UserHouse::is_vacant($house->id))
+            <a type="button" class="btn btn-primary"
+               href="{!! URL::to('admin/house/'.$house->id.'/terminate') !!}">Terminate
+                Tenant
+            </a>
+        @else
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lk">Add
+                Tenant
+            </button>
+        @endif
     @endif
 
     <div class="modal fade bs-example-modal-lk" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">

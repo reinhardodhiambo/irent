@@ -122,7 +122,7 @@ class RepairController
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -146,5 +146,19 @@ class RepairController
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function changestatus($id){
+        $repair = Repair::find($id);
+        if ($repair->status == 0)
+            $repair->status = 1;
+        else
+            $repair->status = 0;
+        $repair->save();
+        return back()->withInput();
     }
 }

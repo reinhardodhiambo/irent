@@ -22,7 +22,7 @@
                 <tr>
                     <td>{{ $repair->name }}</td>
                     <td>{{ $repair->description }}</td>
-                    @if($repair->price>0)
+                    @if($repair->status!=0)
                         <td><span class="label label-success">Repaired</span></td>
                     @else
                         <td><span class="label label-warning">Not Repaired</span></td>

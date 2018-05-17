@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Repair extends Model
 {
     protected $table = 'repairs';
-    protected $fillable = ['name','description','apartment_id','user_id'];
+    protected $fillable = ['name','description','apartment_id','user_id','status'];
 
     public function photos()
     {

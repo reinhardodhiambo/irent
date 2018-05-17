@@ -101,7 +101,7 @@
                         <td><?php echo e($house->house_number); ?></td>
                         <td><?php echo e($house->floor); ?></td>
                         <td>
-                            <?php if(!isset($house->UserHouse->user_id)): ?><span class="label label-warning">Vacant</span>
+                            <?php if(App\UserHouse::is_vacant($house->id)): ?><span class="label label-warning">Vacant</span>
                             <?php else: ?>
                                 <span class="label label-success">Not Vacant</span>
                             <?php endif; ?>

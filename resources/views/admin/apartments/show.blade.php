@@ -107,7 +107,7 @@
                         <td>{{ $house->house_number }}</td>
                         <td>{{ $house->floor }}</td>
                         <td>
-                            @if(!isset($house->UserHouse->user_id))<span class="label label-warning">Vacant</span>
+                            @if(App\UserHouse::is_vacant($house->id))<span class="label label-warning">Vacant</span>
                             @else
                                 <span class="label label-success">Not Vacant</span>
                             @endif

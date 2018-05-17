@@ -20,7 +20,7 @@
                 <tr>
                     <td><?php echo e($repair->name); ?></td>
                     <td><?php echo e($repair->description); ?></td>
-                    <?php if($repair->price>0): ?>
+                    <?php if($repair->status!=0): ?>
                         <td><span class="label label-success">Repaired</span></td>
                     <?php else: ?>
                         <td><span class="label label-warning">Not Repaired</span></td>

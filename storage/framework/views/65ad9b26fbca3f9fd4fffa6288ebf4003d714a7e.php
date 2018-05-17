@@ -61,13 +61,13 @@
                     <?php if(auth()->user()->hasRole('authenticated')): ?>
                         
                         <form class="w3-container w3-display-middle w3-card-4 w3-padding-16" method="POST"
-                        id="payment-form"
-                        action="<?php echo URL::to('paypal/'.$house->id.'/'.$house->apartment_id); ?>">
-                        <?php echo e(csrf_field()); ?>
+                              id="payment-form"
+                              action="<?php echo URL::to('paypal/'.$house->id.'/'.$house->apartment_id); ?>">
+                            <?php echo e(csrf_field()); ?>
 
-                        <input class="w3-input w3-border" id="amount" type="hidden" name="amount"
-                               value=<?php echo e($house->price); ?>></p>
-                        <button class="w3-btn w3-blue">Pay with PayPal</button>
+                            <input class="w3-input w3-border" id="amount" type="hidden" name="amount"
+                                   value=<?php echo e($house->price); ?>></p>
+                            <button class="w3-btn w3-blue">Pay with PayPal</button>
                         </form>
                         
                         <button data-toggle="modal" data-target=".bs-example-modal-pm">Other</button>
@@ -77,7 +77,7 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td> <?php if(!isset($house->UserHouse->user_id)): ?><span class="label label-warning">Vacant</span>
+                <td> <?php if(App\UserHouse::is_vacant($house->id)): ?><span class="label label-warning">Vacant</span>
                     <?php else: ?>
                         <span class="label label-success">Not Vacant</span>
                     <?php endif; ?></td>
@@ -96,8 +96,16 @@
         </table>
     </div>
     <?php if(auth()->user()->hasRole('administrator') || auth()->user()->hasRole('administrator')): ?>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lk">Add Tenant
-        </button>
+        <?php if(!App\UserHouse::is_vacant($house->id)): ?>
+            <a type="button" class="btn btn-primary"
+               href="<?php echo URL::to('admin/house/'.$house->id.'/terminate'); ?>">Terminate
+                Tenant
+            </a>
+        <?php else: ?>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lk">Add
+                Tenant
+            </button>
+        <?php endif; ?>
     <?php endif; ?>
 
     <div class="modal fade bs-example-modal-lk" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">

@@ -81,12 +81,12 @@ class DashboardController extends Controller
                     ->datasets([
                         [
                             "label" => "House Uptake",
-                            'backgroundColor' => ['rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)','rgba(230, 100, 235, 0.2)', 'rgba(230, 100, 235, 0.2)'],
+                            'backgroundColor' => ['rgba(230, 100, 235, 0.9)', 'rgba(230, 100, 235, 0.9)','rgba(230, 100, 235, 0.9)', 'rgba(230, 100, 235, 0.9)','rgba(230, 100, 235, 0.9)', 'rgba(230, 100, 235, 0.9)','rgba(230, 100, 235, 0.9)', 'rgba(230, 100, 235, 0.9)','rgba(230, 100, 235, 0.9)', 'rgba(230, 100, 235, 0.9)','rgba(230, 100, 235, 0.9)', 'rgba(230, 100, 235, 0.9)'],
                             'data' =>$rate[0]
                         ],
                         [
                             "label" => "Vacation",
-                            'backgroundColor' => ['rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)','rgba(54, 200, 235, 0.2)', 'rgba(54, 200, 235, 0.2)'],
+                            'backgroundColor' => ['rgba(54, 200, 235, 0.9)', 'rgba(54, 200, 235, 0.9)','rgba(54, 200, 235, 0.9)', 'rgba(54, 200, 235, 0.9)','rgba(54, 200, 235, 0.9)', 'rgba(54, 200, 235, 0.9)','rgba(54, 200, 235, 0.9)', 'rgba(54, 200, 235, 0.9)','rgba(54, 200, 235, 0.9)', 'rgba(54, 200, 235, 0.9)','rgba(54, 200, 235, 0.9)', 'rgba(54, 200, 235, 0.9)'],
                             'data' => $rate[1]
                         ]
                     ])
@@ -180,7 +180,7 @@ class DashboardController extends Controller
         $uptake = [];
         $vacation = [];
         $houzes = [];
-        for ($months=0; $months<12; $months++) {
+        for ($months=1; $months<13; $months++) {
             $new_tenants = 0;
             $vacating_tenants = 0;
             foreach ($houses as $house) {
@@ -188,7 +188,8 @@ class DashboardController extends Controller
                 foreach ($userHouses as $userHouse) {
                     if($userHouse->updated_at->month==$months){
                         $new_tenants++;
-                        if(array_search($house->id,$houzes)){
+                        //if(array_search($userHouse->house_id,$houzes)){
+                        if($userHouse->user_id==0){
                             $vacating_tenants++;
                         }
                     }

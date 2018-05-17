@@ -6,8 +6,10 @@ use App\House;
 use App\Http\Controllers\Controller;
 use App\Models\Auth\User\User;
 use App\UserHouse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Notifications\Auth\ContractEmail;
+use Illuminate\Support\Facades\DB;
 
 class HouseController extends Controller
 {
@@ -18,7 +20,7 @@ class HouseController extends Controller
      */
     public function index($apartment_id)
     {
-        $houses = House::where('apartment_id', id)->with('user_house')->paginate(15);
+        $houses = House::where('apartment_id', id)->with('user_house','user_house.user')->paginate();
 
         return $houses;
 
@@ -150,6 +152,17 @@ class HouseController extends Controller
 
         return json_encode(["error" => 403, "message" => "user not found"]);
 
+    }
+
+    public function terminate($house_id){
+        $userHouse = UserHouse::where('house_id',$house_id)->where('user_id','!=',0)->first();
+        if($userHouse){
+            //$user_house = DB::statement("UPDATE user_house SET user_id = 0,updated_at = '".Carbon::now()."' where user_id =".$user_id." AND house_id=".$house_id);
+            $userHouse->user_id = 0;
+            $userHouse->save();
+
+        }
+        return back()->withInput();
     }
 
     public static function getUserHouses($house_id, $user_id)

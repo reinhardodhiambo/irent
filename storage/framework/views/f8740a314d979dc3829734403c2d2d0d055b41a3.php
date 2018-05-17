@@ -30,7 +30,7 @@
 
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <?php if(!auth()->user()->hasRole('caretaker')): ?>
+            <?php if(auth()->user()->hasRole('administrator')): ?>
                 <div class="menu_section">
                     <h3><?php echo e(__('views.backend.section.navigation.sub_header_0')); ?></h3>
                     <ul class="nav side-menu">
@@ -41,14 +41,12 @@
 
                             </a>
                         </li>
-                        <?php if(auth()->user()->hasRole('administrator')): ?>
-                            <li>
-                                <a href="<?php echo e(route('admin.kra')); ?>">
-                                    <i class="fa fa-percent" aria-hidden="true"></i>
-                                    KRA
-                                </a>
-                            </li>
-                        <?php endif; ?>
+                        <li>
+                            <a href="<?php echo e(route('admin.kra')); ?>">
+                                <i class="fa fa-percent" aria-hidden="true"></i>
+                                KRA
+                            </a>
+                        </li>
                     </ul>
                 </div>
             <?php endif; ?>
@@ -71,12 +69,14 @@
 
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo e(route('admin.receipts')); ?>">
-                            <i class="fa fa-file" aria-hidden="true"></i>
-                            Receipts
-                        </a>
-                    </li>
+                    <?php if(auth()->user()->hasRole('authenticated')): ?>
+                        <li>
+                            <a href="<?php echo e(route('admin.receipts')); ?>">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                                Receipts
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
 
